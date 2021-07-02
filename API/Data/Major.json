@@ -1,0 +1,17 @@
+[
+  {
+    "MajorId": 1,
+    "MajorName": "Accounting",
+    "MajorCatId": 1
+  },
+  {
+    "MajorId": 2,
+    "MajorName": "Marketing",
+    "MajorCatId": 1
+  },
+  {
+    "MajorId": 3,
+    "MajorName": "Biology",
+    "MajorCatId": 2
+  }
+]

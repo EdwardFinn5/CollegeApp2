@@ -1,0 +1,14 @@
+[
+  {
+    "MajorCatId": 1,
+    "MajorCatName": "Business"
+  },
+  {
+    "MajorCatId": 2,
+    "MajorCatName": "Science"
+  },
+  {
+    "MajorCatId": 3,
+    "MajorCatName": "Art"
+  }
+]

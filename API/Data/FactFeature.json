@@ -1,0 +1,17 @@
+[
+  {
+    "FactId": 1,
+    "FactBullet": "Founded by the Sisters of Saint Francis of Dubuque, IA.",
+    "CollegeNum": 1
+  },
+  {
+    "FactId": 2,
+    "FactBullet": "Student body…..42 states and 26 foreign countries.",
+    "CollegeNum": 1
+  },
+  {
+    "FactId": 3,
+    "FactBullet": "100% of first-time, full-time students receive financial aid.",
+    "CollegeNum": 1
+  }
+]
