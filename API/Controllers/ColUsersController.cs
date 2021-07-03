@@ -28,6 +28,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ColUser>>> GetColUsers()
         {
             var colUsers = await _context.ColUsers.ToListAsync();
@@ -35,6 +36,7 @@ namespace API.Controllers
             return colUsers;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<ColUser>> GetColUser(int id)
         {

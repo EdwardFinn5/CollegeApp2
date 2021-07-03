@@ -70,8 +70,128 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AdminContact")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AdminTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AverageAid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClassYear")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ColUserName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColUserType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeEnrollment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeNickname")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CollegeNum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CollegePhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegePresident")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeStreet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeVirtual")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeWebsite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeYearFounded")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CollegeZip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DreamJob")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExtraCurricular")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("GPA")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("GradDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("HsGradDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HsLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HsName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NetPay")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ProposedMajor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoomAndBoard")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tuition")
+                        .HasColumnType("int");
 
                     b.HasKey("ColUserId");
 
