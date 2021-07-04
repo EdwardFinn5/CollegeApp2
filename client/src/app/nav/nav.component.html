@@ -1,0 +1,204 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+
+  <div class="container">
+    <img src='../../assets/ICF_Logo.jpg' routerLink="/" class="logo" height="40" width="40"
+      style="margin-right: 10px; margin-left: 0px" />
+    <a class="navbar-brand" style="margin-right: 50px" routerLink="/">ICF Connect</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse show" id="navbarCollapse" style>
+
+      <ul class="navbar-nav mr-auto" style="font-size: 1.3em">
+
+        <!-- <li class="nav-item dropdown ml-3 mr-3" *ngIf="colAccountService.colUserType !== 'College'"> -->
+        <li class="nav-item dropdown mr-3">
+          <a class="nav-link active dropdown-toggle" href="/college" id="dropdown01" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Search Colleges</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" routerLink='/college'>Search Colleges</a>
+
+            <!-- <ng-container *ngIf="colAccountService.colUserType == 'ColLead'"  > -->
+            <ng-container>
+              <a class="dropdown-item" routerLink='/colmembers'>See Results</a>
+              <!-- <a *ngIf="colAccountService.colUserType == 'ColLead'"  class="dropdown-item" routerLink='/lists'>Lists</a> -->
+              <a class="dropdown-item" routerLink='/messages'>Messages</a>
+            </ng-container>
+
+          </div>
+        </li>
+
+
+        <!-- <li class="nav-item dropdown" *ngIf="(colAccountService.currentColUser$ | async) === null"> -->
+        <!-- <li class="nav-item dropdown" *ngIf="colAccountService.colUserType !== 'ColLead'"> -->
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="/hsstudent" id="dropdown01" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">Search HS Students</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" routerLink='/hsstudent'>Search HS Students</a>
+
+            <!-- <ng-container *ngIf="colAccountService.colUserType == 'College'"> -->
+            <ng-container>
+              <a class="dropdown-item" routerLink='/colmembers'>See Results</a>
+              <!-- <a class="dropdown-item" routerLink='/lists'>Lists</a> -->
+              <!-- <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/messages'>Messages</a>  -->
+              <a class="dropdown-item" routerLink='/messages'>Messages</a>
+            </ng-container>
+
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/errors" routerLinkActive='active'>Errors</a>
+        </li>
+
+      </ul>
+
+      <!-- <li class="nav-item dropdown ml-5 mr-5">
+        <a class="nav-link active dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Talent</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" routerLink='/talent'>Search Talent</a>
+          <a *ngIf="accountService.currentUser$ | async"  class="dropdown-item" routerLink='/memberlist'>See Results</a>
+          <a *ngIf="accountService.currentUser$ | async"  class="dropdown-item" routerLink='/lists'>Good Fits</a>
+          <a *ngIf="accountService.currentUser$ | async"  class="dropdown-item" routerLink='/messages'>Messages</a>
+        </div>
+      </li>   
+      
+      <li class="nav-item dropdown">
+        <a class="nav-link active dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Internships/Jobs</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" routerLink='/job'>Search Jobs/Internships</a>
+          <a *ngIf="accountService.currentUser$ | async"  class="dropdown-item" routerLink='/memberlist'>See Results</a>
+          <a *ngIf="accountService.currentUser$ | async"  class="dropdown-item" routerLink='/lists'>Good Fits</a>
+          <a *ngIf="accountService.currentUser$ | async"  class="dropdown-item" routerLink='/messages'>Messages</a>
+        </div>
+      </li>
+      <li *appHasRole='["Admin", "Moderator"]' class="nav-item">
+        <a class="nav-link" routerLink='/admin' routerLinkAcive='active'>Admin</a>
+      </li>
+    </ul>
+  
+    <div *ngIf="accountService.appUserType == 'Admin'">
+      <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+        <img src="{{user.logoUrl || '../../assets/ICF_Logo.jpg' }}" alt="{{user.userName}}" class="logo">
+        <a class="dropdown-toggle text-light ml-2" dropdownToggle>Welcome {{user.userName | titlecase}}</a>
+          <div class="dropdown-menu mt-2" *dropdownMenu>
+            <a routerLink='/company/edit' class="dropdown-item">Edit Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logout()">Logout user</a>
+            </div>
+        </div>
+      </div>
+
+  <div *ngIf="accountService.appUserType == 'EmpHr'">
+    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+      <img src="{{user.logoUrl || '../../assets/images/logo.PNG' }}" alt="{{user.userName}}" class="logo">
+      <a class="dropdown-toggle text-light ml-2" dropdownToggle>Welcome {{user.firstName || user.username | titlecase}}</a>
+        <div class="dropdown-menu mt-2" *dropdownMenu>
+          <a routerLink='/company/edit' class="dropdown-item">Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout user</a>
+          </div>
+      </div>
+    </div>
+  
+
+  <div *ngIf="accountService.appUserType == 'ColStudent'">
+    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+      <img src="{{user.studentUrl || '../../assets/images/coluser.PNG'}}" alt="{{user.userName}}">
+        <a class="dropdown-toggle text-light ml-2" dropdownToggle>Welcome {{user.firstName || user.username | titlecase}}</a>
+        <div class="dropdown-menu mt-2" *dropdownMenu>
+          <a routerLink='/member/edit' class="dropdown-item">Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout user</a>
+          </div>
+      </div>
+    </div>
+
+    <div *ngIf="colAccountService.colUserType == 'College'">
+        <div class="dropdown" *ngIf="(colAccountService.currentUser$ | async) as colUser" dropdown>
+          <div class="dropdown" style="font-size: 1.3em" dropdown>
+            <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{colUser.colUserName | titlecase}} </a>
+            <div class="dropdown-menu mt-3" *dropdownMenu>
+              <a routerLink='/college/edit' class="dropdown-item">Edit Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="colLogout()">Logout coluser</a>
+            </div>
+          </div> 
+        </div>
+    </div>
+
+    <div *ngIf="colAccountService.colUserType == 'ColLead'">
+      <div class="dropdown" *ngIf="(colAccountService.currentUser$ | async) as colUser" dropdown>
+        <div class="dropdown" style="font-size: 1.3em" dropdown>
+          <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{colUser.colUserName | titlecase}} </a>
+          <div class="dropdown-menu mt-3" *dropdownMenu>
+            <a routerLink='/hs/edit' class="dropdown-item">Edit Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="colLogout()">Logout coluser</a>
+          </div>
+        </div> 
+      </div>
+  </div> -->
+
+      <!-- <div class="dropdown"  *ngIf="(colAccountService.currentColUser$ | async) as colUser" dropdown>
+    <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{colUser.firstName | titlecase}}</a>
+    <div class="dropdown-menu mt-3" *dropdownMenu>
+      <a class="dropdowm-item">Edit Profile</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdowm-item" (click)="logout()">Logout</a>
+    </div>
+
+  </div> -->
+
+      <!-- <div *ngIf="colAccountService.colUserType == 'College'">
+        <div class="dropdown" *ngIf="(colAccountService.currentColUser$ | async) as colUser" dropdown>
+          <img src="{{colUser.colUrl}}" alt="{{colUser.collegeName}}">
+
+          <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.firstName
+            | titlecase}} </a>
+          <div class="dropdown-menu mt-3" *dropdownMenu>
+            <a routerLink='/collegeedit' class="dropdown-item">Edit Profile</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="logout()">Logout coluser</a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+      <!-- <div *ngIf="colAccountService.colUserType == 'ColLead'"> -->
+
+      <!-- <div class="dropdown" *ngIf="(colAccountService.currentColUser$ | async) as colUser" dropdown> -->
+      <div class="dropdown" dropdown>
+        <!-- <img src="{{colUser.hsStudentUrl || '../../assets/images/coluser.PNG'}}" alt="pic"> -->
+
+        <!-- <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.firstName |
+          titlecase}}</a> -->
+        <a class="dropdown-toggle text-light" style="font-size: 1.3em" dropdownToggle>Welcome You</a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a routerLink='/hsedit' class="dropdown-item">Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout coluser</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- <form *ngIf="(colAccountService.currentColUser$ | async) === null"  #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" 
+    autocomplete="off">
+    <input name="colUserName" 
+      [(ngModel)]="model.colUserName" 
+      class="form-control mr-2" 
+      type="text"
+      placeholder="Firstname">
+    <input name="password"  
+      [(ngModel)]="model.password"  
+      class="form-control" 
+      type="password" 
+      placeholder="Password">
+    <button class="btn btn-success my-2 my-sm-0 ml-2" type="submit">Login</button>
+  </form> -->
