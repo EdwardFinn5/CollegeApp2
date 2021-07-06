@@ -1,19 +1,28 @@
 <div class="container mt-5">
     <div style="text-align: center;">
-        <h1>See profiles of 23 of Iowa's private colleges and universities</h1>
-        <p class="lead"><strong>If you are one of ICF's donors at the Partnership level,
-                please sign up and login to discover talent
-                <br>
-                among the 35,000+ students who attend 23 of the private colleges and universities in Iowa!</strong>
-        <p>
+        <h1>Search 23 private Colleges and Universities in Iowa</h1>
+        <p class="lead"><strong>If you are a high school student looking for a great post-secondary experience,  
+            <br>
+            please sign up and login to search 23 of the private colleges and universities in Iowa!</strong><p>
         <div class="text-center">
+
+            <!-- <div class="form-group">
+                <label>Who is your favorite user?</label>
+                <select class="form-control">
+                    <option *ngFor="let colUser of colUsers" [value]="colUser.colUserName">
+                        {{colUser.colUserName}}
+                    </option>
+                </select>
+             </div> -->
+
             <!-- <button (click)="registerToggle()" class="btn btn-primary btn-lg shadow-sm mr-2">Sign Up</button> -->
 
-            <!-- <input type="button" class="btn btn-primary btn-lg shadow-sm mr-2" (click)="onRegisterBtn()" value="Sign Up"/> -->
-            <!-- <button (click)="registerToggle()" class="btn btn-primary btn-lg shadow-sm mr-2">Register</button> -->
-            <!-- <input type="button" class="btn btn-primary btn-lg shadow-sm ml-2" (click)="onRegisterBtn()" value="Register"/>
-             <input type="button" class="btn btn-primary btn-lg shadow-sm ml-2" (click)="onLoginBtn()" value="Login"/>
-             <input type="button" class="btn btn-secondary btn-lg shadow-sm ml-2" (click)="cancel()" value="Cancel"/> -->
+            <!-- <input type="button" class="btn btn-primary btn-lg shadow-sm mr-2" (click)="onRegisterBtn()" value="Sign Up"/>
+            <button (click)="registerToggle()" class="btn btn-primary btn-lg shadow-sm mr-2">Register</button> -->
+            <input type="button" class="btn btn-primary btn-lg shadow-sm ml-2" (click)="onRegisterBtn()"
+                value="Register" />
+            <input type="button" class="btn btn-primary btn-lg shadow-sm ml-2" (click)="onLoginBtn()" value="Login" />
+            <input type="button" class="btn btn-secondary btn-lg shadow-sm ml-2" (click)="cancel()" value="Cancel" />
 
             <!-- <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2 shadow-sm">Login</button> -->
 
@@ -21,11 +30,11 @@
         </div>
     </div>
 
-    <!-- <div *ngIf="hsRegisterMode" class="container">
+    <div *ngIf="hsRegisterMode" class="container">
         <div class="row justify-content-center">
             <div class="col-12">
-                <app-hs-register (cancelHsRegister)="cancelHsRegister($event)"></app-hs-register>
+                <app-hs-register (cancelHsRegister)="cancelHsRegisterMode($event)" ></app-hs-register>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>

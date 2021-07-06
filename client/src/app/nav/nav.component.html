@@ -14,17 +14,49 @@
 
       <ul class="navbar-nav mr-auto" style="font-size: 1.3em">
 
-        <!-- <li class="nav-item dropdown ml-3 mr-3" *ngIf="colAccountService.colUserType !== 'College'"> -->
-        <li class="nav-item dropdown mr-3">
+        <!-- <li class="nav-item dropdown ml-3 mr-3" *ngIf="colAccountService.colUserType !== 'ColLead'"> -->
+         <li class="nav-item dropdown mr-3"> 
+          <a class="nav-link active dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Colleges</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" routerLink='/college'>Search Colleges</a>
+            <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/colmembers'>See Results</a>
+            <!-- <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/collists'>Lists</a> -->
+            <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/messages'>Messages</a>
+          </div>
+        </li>     
+
+       
+        <!-- <li class="nav-item dropdown mr-3" *ngIf="(colAccountService.currentColUser$ | async) === null || (colUser.colUserType !== 'College')">  -->
+          <!-- <li class="nav-item dropdown" *ngIf="colAccountService.colUserType !== 'ColLead'"> -->
+          <li class="nav-item dropdown mr-3">  
+          <a class="nav-link active dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">HS Students</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" routerLink='/hsstudent'>Search HS Students</a>
+            <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/colmembers'>See Results</a>
+            <!-- <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/collists'>Lists</a> -->
+            <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/messages'>Messages</a>
+          </div>
+        </li> 
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        <!-- <li class="nav-item dropdown ml-3 mr-3" *ngIf="colAccountService.colUserType !== 'College'">
+          <li class="nav-item dropdown mr-3"> 
           <a class="nav-link active dropdown-toggle" href="/college" id="dropdown01" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">Search Colleges</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" routerLink='/college'>Search Colleges</a>
 
-            <!-- <ng-container *ngIf="colAccountService.colUserType == 'ColLead'"  > -->
-            <ng-container>
+            <ng-container *ngIf="colAccountService.colUserType == 'ColLead'">
+               <ng-container> 
               <a class="dropdown-item" routerLink='/colmembers'>See Results</a>
-              <!-- <a *ngIf="colAccountService.colUserType == 'ColLead'"  class="dropdown-item" routerLink='/lists'>Lists</a> -->
+               <a *ngIf="colAccountService.colUserType == 'ColLead'"  class="dropdown-item" routerLink='/lists'>Lists</a> 
               <a class="dropdown-item" routerLink='/messages'>Messages</a>
             </ng-container>
 
@@ -32,30 +64,45 @@
         </li>
 
 
-        <!-- <li class="nav-item dropdown" *ngIf="(colAccountService.currentColUser$ | async) === null"> -->
-        <!-- <li class="nav-item dropdown" *ngIf="colAccountService.colUserType !== 'ColLead'"> -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="(colAccountService.currentColUser$ | async) === null"> 
+        <li class="nav-item dropdown" *ngIf="colAccountService.colUserType !== 'ColLead'">
+           <li class="nav-item dropdown"> 
           <a class="nav-link active dropdown-toggle" href="/hsstudent" id="dropdown01" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">Search HS Students</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" routerLink='/hsstudent'>Search HS Students</a>
 
-            <!-- <ng-container *ngIf="colAccountService.colUserType == 'College'"> -->
+            <ng-container *ngIf="colAccountService.colUserType == 'College'">
             <ng-container>
               <a class="dropdown-item" routerLink='/colmembers'>See Results</a>
-              <!-- <a class="dropdown-item" routerLink='/lists'>Lists</a> -->
-              <!-- <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/messages'>Messages</a>  -->
+              <a class="dropdown-item" routerLink='/lists'>Lists</a>
+              <a *ngIf="colAccountService.currentColUser$ | async"  class="dropdown-item" routerLink='/messages'>Messages</a>  
               <a class="dropdown-item" routerLink='/messages'>Messages</a>
             </ng-container>
 
           </div>
-        </li>
+        </li>  -->
 
         <li class="nav-item">
           <a class="nav-link" routerLink="/errors" routerLinkActive='active'>Errors</a>
         </li>
 
-      </ul>
+        <!-- <li class="nav-item">
+          <a class="nav-link" (click)="logout()" href="#">Logout</a>
+        </li> -->
+
+      </ul> 
+
+      <!-- <div class="dropdown" dropdown>
+        <a class="dropdown-toggle text light" dropdownToggle>Welcome user</a>
+        <div class="dropdown-ment" *dropdownMenu>
+          <a class="dropdown-item">Edit</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+
+
+      </div> -->
 
       <!-- <li class="nav-item dropdown ml-5 mr-5">
         <a class="nav-link active dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Search Talent</a>
@@ -171,8 +218,8 @@
 
       <!-- <div *ngIf="colAccountService.colUserType == 'ColLead'"> -->
 
-      <!-- <div class="dropdown" *ngIf="(colAccountService.currentColUser$ | async) as colUser" dropdown> -->
       <div class="dropdown" dropdown>
+
         <!-- <img src="{{colUser.hsStudentUrl || '../../assets/images/coluser.PNG'}}" alt="pic"> -->
 
         <!-- <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.firstName |
@@ -184,8 +231,10 @@
           <a class="dropdown-item" (click)="logout()">Logout coluser</a>
         </div>
       </div>
-    </div>
-  </div>
+      </div>
+      </div>
+    
+
 </nav>
 
 <!-- <form *ngIf="(colAccountService.currentColUser$ | async) === null"  #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" 

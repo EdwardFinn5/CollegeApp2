@@ -1,1 +1,83 @@
-<p>college-register works!</p>
+<div class="row">
+    <div class="col-6 m-auto shadow-lg p-0 bg-white">
+        <div class="card m-auto">
+            <div class="card-header">
+                <h3>Sign Up as a College admin</h3>
+            </div>
+            <div class="card-body">
+
+                <form #registerForm (ngSubmit)="collegeRegister()" autocomplete="off">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" [(ngModel)]="model.colUserName"
+                            placeholder="Username">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="password" [(ngModel)]="model.password"
+                            placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <button  type="submit" class="btn btn-primary mr-3">Register</button>
+                        <!-- <button type="submit" class="btn btn-primary mr-3">Register</button> -->
+                        <button type="button" class="btn btn-secondary ml-1" (click)="cancel()">Cancel</button>
+                    </div>
+                </form>
+
+
+                <!-- <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && empRegister()" autocomplete="off">
+
+                    <app-text-input [formControl]='registerForm.controls["username"]' 
+                        [label]='"Username"'>
+                    </app-text-input>
+                    <app-text-input [formControl]='registerForm.controls["firstName"]' 
+                        [label]='"First Name"'>
+                    </app-text-input>
+                    <app-text-input [formControl]='registerForm.controls["position"]' 
+                        [label]='"Position"'>
+                    </app-text-input>
+
+                    <div class="form-group">
+                        <label class="control-label" style="margin-right: 10px;">Position Type: </label>
+                        <label class="radio-inline">
+                            <input type="radio" value='Fulltime' formControlName="positionType"> Fulltime
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value='Part-Time' formControlName="positionType" class="ml-2"> Part-Time
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value='Internship' formControlName="positionType" class="ml-2"> Internship
+                        </label>
+                    </div>  
+                    <app-date-input [formControl]='registerForm.controls["startDate"]' 
+                        [label]='"Start Date"'>
+                    </app-date-input>
+
+                    <app-text-input [formControl]='registerForm.controls["positionLocation"]'
+                        [label]='"Position Location"'>
+                    </app-text-input>
+                    <app-text-input [formControl]='registerForm.controls["company"]' 
+                        [label]='"Company"'>
+                    </app-text-input>
+                    <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Password"'
+                        [type]='"password"'>
+                    </app-text-input>
+                    <app-text-input [formControl]='registerForm.controls["confirmPassword"]'
+                        [label]='"Confirm Password"' [type]='"password"'>
+                    </app-text-input>
+
+                    <div class="row" *ngIf="validationErrors.length > 0">
+                        <ul class="text-danger">
+                            <li *ngFor="let error of validationErrors">
+                                {{error}}
+                            </li>
+                        </ul>
+                    </div> -->
+
+                    <!-- <div class="form-group">
+                        <button [disabled]='!registerForm.valid' type="submit" class="btn btn-primary mr-3">Register</button>
+                        <button type="submit" class="btn btn-primary mr-3">Register</button>
+                        <button type="button" class="btn btn-secondary ml-1" (click)="cancel()">Cancel</button>
+                    </div> -->
+                <!-- </form> -->

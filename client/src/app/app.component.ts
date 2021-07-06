@@ -1,28 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ColUser } from './_models/colUser';
+import { ColAccountService } from './_services/col-account.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'College Connect';
   colUsers: any;
+  colUserType = 'ColLead';
 
-  constructor(private http: HttpClient) {}
-  
+  constructor(private colAccountService: ColAccountService) {}
+
   ngOnInit() {
-  this.getColUsers(); 
+    this.setCurrentUser();
   }
 
-  getColUsers() {
-    this.http.get('https://localhost:5001/api/colUsers').subscribe(response => {
-      this.colUsers = response;
-      console.log(response);
-    }, error => {
-      console.log(error);
-    })  
+  setCurrentUser() {
+    const colUser: ColUser = JSON.parse(localStorage.getItem('colUser'));
+    this.colAccountService.setCurrentColUser(colUser);
   }
-  
 }

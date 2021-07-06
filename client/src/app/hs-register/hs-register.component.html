@@ -1,1 +1,152 @@
-<p>hs-register works!</p>
+<div class="row">
+    <div class="col-6 m-auto shadow-lg p-0 bg-white">
+        <div class="card m-auto">
+            <div class="card-header">
+                <h3>Please sign up as a HS student</h3>
+            </div>
+            <div class="card-body">
+
+                <form #registerForm (ngSubmit)="hsRegister()" autocomplete="off">
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" [(ngModel)]="model.colUserName"
+                            placeholder="Username">
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label>Who is your favorite user?</label>
+                        <select class="form-control">
+                            <option *ngFor="let colUser of colUsers" [value]="colUser.colUserName">
+                                {{colUser.colUserName}}
+                            </option>
+                        </select>
+                     </div> -->
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="password" [(ngModel)]="model.password"
+                            placeholder="Password">
+                    </div>
+
+                    <div class="form-group">
+                        <button  type="submit" class="btn btn-primary mr-3">Register</button>
+                        <!-- <button type="submit" class="btn btn-primary mr-3">Register</button> -->
+                        <button type="button" class="btn btn-secondary ml-1" (click)="cancel()">Cancel</button>
+                    </div>
+                </form>
+
+
+                <!-- <form [formGroup]='registerForm' (ngSubmit)="registerForm.valid && hsRegister()" autocomplete="off">
+
+                    <div class="form-group">
+                        
+                        <label class="control-label"  style="margin-right: 10px;">I am a: </label>
+                        <br>
+                        <label class="radio-inline">
+                            <input type="radio" value='Freshman' class="mr-1" formControlName='classYear'>Freshman
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value='Sophomore'class="mr-1 ml-2" formControlName='classYear'>Sophomore
+                        </label>
+                        <br>
+                        <label class="radio-inline">
+                            <input type="radio" value='Junior' class="mr-1" formControlName='classYear'>Junior
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value='Senior' class="mr-1 ml-2" formControlName='classYear'>Senior
+                        </label>
+                        
+                    </div> -->
+
+                    <!-- <app-text-input   [formControl]='registerForm.controls["colUsername"]' 
+                        [label]='"Username"' class="mb-2" ></app-text-input>    
+                    <app-text-input [formControl]='registerForm.controls["firstName"]' 
+                        [label]='"First Name"'></app-text-input>   
+                    <app-text-input [formControl]='registerForm.controls["hsName"]' 
+                        [label]='"High School"'></app-text-input>  
+                    <app-text-input [formControl]='registerForm.controls["hsLocation"]' 
+                        [label]='"High School Location"'></app-text-input>   
+                    <app-text-input [formControl]='registerForm.controls["password"]' 
+                        [label]='"Password"'[type]='"password"'></app-text-input>    
+                    <app-text-input [formControl]='registerForm.controls["confirmPassword"]' 
+                        [label]='"Confirm Password"' [type]='"password"' ></app-text-input>     -->
+
+                    <!-- <div class="form-group">
+                        <input 
+                            [class.is-invalid]='registerForm.get("colUsername").errors 
+                                && registerForm.get("colUsername").touched'
+                            type="text" 
+                            class="form-control" 
+                            formControlName='colUsername'
+                            placeholder="Username">
+                        <div class="invalid-feedback">Please enter a username</div>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            [class.is-invalid]='registerForm.get("firstName").errors 
+                                && registerForm.get("firstName").touched'
+                            type="text" 
+                            class="form-control" 
+                            formControlName='firstName'
+                            placeholder="First Name">
+                        <div class="invalid-feedback">Please enter a first name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            [class.is-invalid]='registerForm.get("password").errors 
+                                && registerForm.get("password").touched'
+                            type="password" 
+                            class="form-control" 
+                            formControlName='password'
+                            placeholder="Password">
+                        <div *ngIf="registerForm.get('password').hasError('required')" 
+                            class="invalid-feedback">Please enter a password</div>   
+                        <div *ngIf="registerForm.get('password').hasError('minlength')" 
+                            class="invalid-feedback">Password must be at least 4 characters</div>   
+                        <div *ngIf="registerForm.get('password').hasError('maxlength')" 
+                            class="invalid-feedback">Password cannot exceed 8 characters</div>    
+                    </div>
+
+                    <div class="form-group">
+                        <input 
+                            [class.is-invalid]='registerForm.get("confirmPassword").errors 
+                                && registerForm.get("confirmPassword").touched'
+                            type="password" 
+                            class="form-control" 
+                            formControlName='confirmPassword'
+                            placeholder="Confirm Password">
+                        <div *ngIf="registerForm.get('confirmPassword').hasError('required')" 
+                            class="invalid-feedback">Please enter a confirm password</div>   
+                        <div *ngIf="registerForm.get('confirmPassword').hasError('isMatching')" 
+                            class="invalid-feedback">Confirm password must match password</div>   
+                    </div> -->
+
+                    <!-- <div class="row" *ngIf="validationErrors.length > 0" >
+                        <ul class="text-danger">
+                            <li *ngFor="let error of validationErrors">
+                                {{error}}
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="form-group text-center">
+                        <button [disabled]=!registerForm.valid type="submit" class="btn btn-primary mr-3">Register </button>
+                        <!-- <button type="submit" class="btn btn-primary mr-3">Register</button> 
+                        <button type="button" class="btn btn-secondary ml-1" (click)="cancel()">Cancel</button>
+                    </div>
+                </form> -->
+               
+                </div>
+                </div>
+                </div>
+                </div>
+                
+
+
+                
+
+
+
+
+                 
