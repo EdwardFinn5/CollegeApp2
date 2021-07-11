@@ -16,30 +16,40 @@ import { ColmemberListComponent } from './colmembers/colmember-list/colmember-li
 // import { AuthGuard } from './_guards/auth.guard';
 import { HsDetailComponent } from './hs-detail/hs-detail.component';
 import { MessagesComponent } from './messages/messages.component';
+import { AuthGuard } from './_guards/auth.guard';
 // import { PreventUnsavedHsChangesGuard } from './_guards/prevent-unsaved-hs-changes.guard';
 // import { PreventUnsavedCollegeChangesGuard } from './_guards/prevent-unsaved-college-changes.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'colmembers', component: ColmemberListComponent },
-  { path: 'hsmemberedit', component: HsEditComponent },
-  { path: 'hsdetail/:colusername', component: HsDetailComponent },
-  { path: 'hsedit', component: HsEditComponent },
-  { path: 'collegeedit', component: CollegeEditComponent },
-  { path: 'collegedetail/:colusername', component: CollegeDetailComponent },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'colmembers', component: ColmemberListComponent },
+      { path: 'hsmemberedit', component: HsEditComponent },
+      { path: 'hsdetail/:colusername', component: HsDetailComponent },
+      { path: 'hsdetail/:id', component: HsDetailComponent },
+      { path: 'hsedit', component: HsEditComponent },
+      { path: 'collegeedit', component: CollegeEditComponent },
+      { path: 'collegedetail/:colusername', component: CollegeDetailComponent },
+      { path: 'collegedetail/:id', component: CollegeDetailComponent },
+      { path: 'messages', component: MessagesComponent },
+    ],
+  },
   { path: 'hsstudent', component: HsStudentComponent },
   { path: 'college', component: CollegeComponent },
   { path: 'coluserlogin', component: ColUserLoginComponent },
   { path: 'collegeregister', component: CollegeRegisterComponent },
   { path: 'hsregister', component: HsRegisterComponent },
   { path: 'errors', component: TestErrorsComponent },
-  { path: 'messages', component: MessagesComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

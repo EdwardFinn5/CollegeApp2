@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ColAccountService } from '../_services/col-account.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ColUserLoginComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private colAccountService: ColAccountService
+    private colAccountService: ColAccountService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {}
@@ -26,6 +28,7 @@ export class ColUserLoginComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.toastr.error(error.error);
       }
     );
   }

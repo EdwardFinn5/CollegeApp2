@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 // import { ToastrService } from 'ngx-toastr';
 
@@ -16,7 +17,7 @@ export class CollegeRegisterComponent implements OnInit {
 
   constructor(
     private colAccountService: ColAccountService,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private router: Router
   ) {}
 
@@ -31,7 +32,7 @@ export class CollegeRegisterComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        // this.toastr.error(error.error);
+        this.toastr.error(error.error);
       }
     );
   }

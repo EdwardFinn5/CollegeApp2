@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ColUser } from '../_models/colUser';
 // import { ToastrService } from 'ngx-toastr';
 import { ColAccountService } from '../_services/col-account.service';
@@ -28,7 +29,7 @@ export class HsRegisterComponent implements OnInit {
   constructor(
     private colAccountService: ColAccountService,
     private http: HttpClient,
-    // private toastr: ToastrService,
+    private toastr: ToastrService,
     private router: Router,
     private fb: FormBuilder
   ) {}
@@ -75,6 +76,7 @@ export class HsRegisterComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+        this.toastr.error(error.error);
         this.validationErrors = error;
       }
     );

@@ -25,6 +25,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { MessagesComponent } from './messages/messages.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './_modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    BsDropdownModule.forRoot(),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

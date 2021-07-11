@@ -201,11 +201,11 @@
 
   </div> -->
 
-      <!-- <div *ngIf="colAccountService.colUserType == 'College'">
+      <div *ngIf="colAccountService.colUserType == 'College'">
         <div class="dropdown" *ngIf="(colAccountService.currentColUser$ | async) as colUser" dropdown>
-          <img src="{{colUser.colUrl}}" alt="{{colUser.collegeName}}">
+          <img src="{{colUser.colUrl}}" alt="{{colUser.firstName}}">
 
-          <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.firstName
+          <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.colUserName
             | titlecase}} </a>
           <div class="dropdown-menu mt-3" *dropdownMenu>
             <a routerLink='/collegeedit' class="dropdown-item">Edit Profile</a>
@@ -214,26 +214,24 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
-      <!-- <div *ngIf="colAccountService.colUserType == 'ColLead'"> -->
+    <div *ngIf="colAccountService.colUserType == 'ColLead'">
+      <div class="dropdown" *ngIf="(colAccountService.currentColUser$ | async) as colUser" dropdown>
+        <img src="{{colUser.hsStudentUrl || '../../assets/images/coluser.PNG'}}" alt="{{colUser.firstName}}">
 
-      <div class="dropdown" dropdown>
-
-        <!-- <img src="{{colUser.hsStudentUrl || '../../assets/images/coluser.PNG'}}" alt="pic"> -->
-
-        <!-- <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.firstName |
-          titlecase}}</a> -->
-        <a class="dropdown-toggle text-light" style="font-size: 1.3em" dropdownToggle>Welcome You</a>
+        <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.colUserName
+          | titlecase}} </a>
         <div class="dropdown-menu mt-3" *dropdownMenu>
-          <a routerLink='/hsedit' class="dropdown-item">Edit Profile</a>
+          <a routerLink='/collegeedit' class="dropdown-item">Edit Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()">Logout coluser</a>
         </div>
       </div>
-      </div>
-      </div>
-    
+    </div>
+  </div>
+
+     
 
 </nav>
 
