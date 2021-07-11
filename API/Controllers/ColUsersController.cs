@@ -4,12 +4,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
-// using API.DTOs;
-
-// using API.Extensions;
-// using API.Interfaces;
-// using API.Services;
-// using AutoMapper;
+using API.Interfaces;
+using API.DTOs;
+using API.Extensions;
+using API.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,52 +19,29 @@ namespace API.Controllers
     [Authorize]
     public class ColUsersController : BaseApiController
     {
-        private readonly DataContext _context;
-        public ColUsersController(DataContext context)
+        private readonly IColUserRepository _colUserRepository;
+        private readonly IMapper _mapper;
+        // private readonly IPhotoService _photoService;
+        public ColUsersController(IColUserRepository colUserRepository, IMapper mapper)
         {
-            _context = context;
-
+            // _photoService = photoService;
+            _mapper = mapper;
+            _colUserRepository = colUserRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ColUser>>> GetColUsers()
+        public async Task<ActionResult<IEnumerable<ColMemberDto>>> GetColUsers()
         {
-            var colUsers = await _context.ColUsers.ToListAsync();
+            var colUsers = await _colUserRepository.GetColMembersAsync();
 
-            return colUsers;
+            return Ok(colUsers);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<ColUser>> GetColUser(int id)
+        [HttpGet("{colUsername}")]
+        public async Task<ActionResult<ColMemberDto>> GetColUser(string colUsername)
         {
-            return await _context.ColUsers.FindAsync(id);
+            return await _colUserRepository.GetColMemberAsync(colUsername);
         }
-
-
-
-        // private readonly IColUserRepository _colUserRepository;
-        // private readonly IMapper _mapper;
-        // private readonly IPhotoService _photoService;
-        // public ColUsersController(IColUserRepository colUserRepository, IMapper mapper, IPhotoService photoService)
-        // {
-        //     _photoService = photoService;
-        //     _mapper = mapper;
-        //     _colUserRepository = colUserRepository;
-        // }
-
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<ColMemberDto>>> GetColUsers()
-        // {
-        //     var colUsers = await _colUserRepository.GetColMembersAsync();
-
-        //     return Ok(colUsers);
-        // }
-
-        // [HttpGet("{colusername}", Name = "GetColUser")]
-        // public async Task<ActionResult<ColMemberDto>> GetColUser(string colusername)
-        // {
-        //     return await _colUserRepository.GetColMemberAsync(colusername);
-        // }
 
         // [HttpPut]
         // public async Task<ActionResult> UpdateColUser(ColMemberUpdateDto colMemberUpdateDto)

@@ -11,8 +11,8 @@ namespace API.Interfaces
         Task<bool> SaveAllAsync();
         Task<IEnumerable<ColUser>> GetColUsersAsync();
         Task<ColUser> GetColUserByIdAsync(int coluserid);
-        Task<ColUser> GetColUserByUsernameAsync(string colusername);
+        Task<ColUser> GetColUserByUsernameAsync(string colUsername);
         Task<IEnumerable<ColMemberDto>> GetColMembersAsync();
-        Task<ColMemberDto> GetColMemberAsync(string colusername);
+        Task<ColMemberDto> GetColMemberAsync(string colUsername);
     }
 }

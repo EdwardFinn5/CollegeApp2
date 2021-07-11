@@ -9,7 +9,7 @@ namespace API.DTOs
         [Key]
         public int ColUserId { get; set; }
         [DataType(DataType.EmailAddress)]
-        public string ColUserName { get; set; }
+        public string ColUsername { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ColUrl { get; set; }
