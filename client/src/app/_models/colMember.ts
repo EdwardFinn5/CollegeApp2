@@ -3,7 +3,7 @@ import { FactFeature } from './factFeature';
 
 export interface ColMember {
   colUserId: number;
-  colUserName: string;
+  colUsername: string;
   firstName: string;
   lastName: string;
   colUrl: string;

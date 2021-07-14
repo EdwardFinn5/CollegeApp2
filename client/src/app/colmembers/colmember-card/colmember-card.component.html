@@ -1,1 +1,47 @@
-<p>colmember-card works!</p>
+<div class="card mb-lg-n4"> 
+    <div class="card-img-wrapper" *ngIf="colMember.colUserType == 'College'">
+        <img src="{{colMember.colUrl}}" alt="{{colMember.collegeName}}" class="card-img-top">
+        <ul class="list-inline member-icons animate text-center">
+            <li class="list-inline-item"><button  routerLink='/collegedetail/{{colMember.colUsername}}' class="btn btn-primary">
+                <i class="fa fa-info"></i></button></li>
+            <li class="list-inline-item"><button class="btn btn-primary">
+                <i class="fa fa-check"></i></button></li>
+            <li class="list-inline-item"><button class="btn btn-primary">
+                <i class="fa fa-envelope"></i></button></li>
+        </ul>
+    </div>
+
+    <div class="card-img-wrapper" *ngIf="colMember.colUserType == 'ColLead'">
+        <img src="{{colMember.hsStudentUrl || '../../assets/images/coluser.PNG'}}" alt="{{colMember.firstName}}" class="card-img-top">
+        <ul class="list-inline member-icons animate text-center">
+            <li class="list-inline-item"><button  routerLink='/hsdetail/{{colMember.colUsername}}' class="btn btn-primary">
+                <i class="fa fa-info"></i></button></li>
+            <li class="list-inline-item"><button class="btn btn-primary">
+                <i class="fa fa-check"></i></button></li>
+            <li class="list-inline-item"><button class="btn btn-primary">
+                <i class="fa fa-envelope"></i></button></li>
+        </ul>
+    </div>
+
+    <div class="card-body p-1">
+        <h6 *ngIf="colMember.colUserType == 'ColLead'" class="card-title text-center mb-1"><i class="fa fa-user mr-2"></i>
+            <u><strong>{{colMember.firstName}}</strong></u>
+        </h6>
+
+        <h6 *ngIf="colMember.colUserType == 'College'" class="card-title text-center mb-1">
+            <u><strong>{{colMember.collegeName}}</strong></u>
+        </h6>
+
+        <p *ngIf="colMember.colUserType == 'ColLead'" class="card-text text-center">
+            High School {{colMember.classYear}} 
+            <br> 
+            at {{colMember.hsName}} in {{colMember.hsLocation}}
+        </p>
+        <p *ngIf="colMember.colUserType == 'College'" class="card-text text-center">
+            Location: {{colMember.collegeLocation}} 
+            <br>
+            Enrollment: {{colMember.collegeEnrollment}} 
+        </p>
+    </div>
+</div>
+

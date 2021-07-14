@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ColMember } from 'src/app/_models/colMember';
 
 @Component({
   selector: 'app-colmember-card',
   templateUrl: './colmember-card.component.html',
-  styleUrls: ['./colmember-card.component.css']
+  styleUrls: ['./colmember-card.component.css'],
 })
 export class ColmemberCardComponent implements OnInit {
+  @Input() colMember: ColMember;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
