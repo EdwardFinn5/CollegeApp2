@@ -1,1 +1,57 @@
-<p>hs-detail works!</p>
+<div class="row shadow" style="margin-left: 25px" *ngIf="colMember">
+    <div class="col-4">  
+
+        <div class="card">
+            <img src="{{colMember.hsStudentUrl || '../../assets/images/coluser.PNG'}}" alt="{{colMember.firstName}}" 
+                class="card-img-top img-studthumbnail">
+            <div class="card-body text-xxl-center">
+                <div>
+                    <p> <u><strong>-- {{colMember.firstName}} --</strong></u>
+                        <br>Year in School:<br>
+                        <strong>{{colMember.classYear}}</strong>
+                        <br>High School:<br>
+                        <strong>{{colMember.hsName}}</strong>
+                        <br>High School Location:<br>
+                        <strong>{{colMember.hsLocation}}</strong>
+                        <br>Date Profile was Created:<br>
+                        <strong>{{colMember.created | date: "MM/dd/yyyy"}}</strong>
+                        <br>Date Last Active:<br>
+                        <strong>{{colMember.lastActive | date: "MM/dd/yyyy"}}</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group d-flex">
+                    <button class="btn btn-primary mr-2">Possible Fit</button>
+                    <button class="btn btn-success">Message</button>
+                </div>
+            </div>
+            </div>
+            </div>
+
+            <div class="col-8">
+
+                <tabset class="member-tabset">
+                    <tab heading='About {{colMember.firstName}}'>
+                        <h4>Academic Information</h4>
+                        <p>GPA: {{colMember.gpa}}</p>
+                        <p>Graduation Date: {{colMember.hsGradDate | date: "MM/dd/yyyy"}}</p>
+                        <h4>Extra-Curricular Activities</h4>
+                        <p>{{colMember.extraCurricular}}</p>
+                        <h4>Proposed Major</h4>
+                        <p>{{colMember.proposedMajor}}</p>
+                        <h4>Dream Job</h4>
+                        <p>{{colMember.dreamJob}}</p>
+                    </tab>
+                    <tab heading='Messages'>
+                        <h4>Messages</h4>
+                    </tab>
+
+                    <tab heading='Photos'>
+                       <ngx-gallery [options]= "galleryOptions" [images]="galleryImages" 
+                            style="display: inline-block; margin-bottom: 20px;"></ngx-gallery>
+                    </tab> 
+
+                </tabset>
+            </div>
+
