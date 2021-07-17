@@ -47,10 +47,9 @@ export class HsEditComponent implements OnInit {
   }
 
   updateColMember() {
-    console.log(this.colMember);
-    //   this.colMemberService.updateColMember(this.colMember).subscribe(() => {
-    this.toastr.success('Profile updated successfully');
-    this.editForm.reset(this.colMember);
-    //   });
+    this.colMemberService.updateColMember(this.colMember).subscribe(() => {
+      this.toastr.success('Profile updated successfully');
+      this.editForm.reset(this.colMember);
+    });
   }
 }

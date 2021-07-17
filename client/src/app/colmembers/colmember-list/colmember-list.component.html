@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div *ngFor="let colMember of colMembers" class="shadow-sm col-lg-4 col-md-6 p-3 my-1">
+        <div *ngFor="let colMember of colMembers$ | async" class="shadow-sm col-lg-4 col-md-6 p-3 my-1">
             <app-colmember-card [colMember]="colMember"></app-colmember-card>
         </div>
     </div>

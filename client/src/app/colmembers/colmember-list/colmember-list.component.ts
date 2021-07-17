@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ColMember } from 'src/app/_models/colMember';
 import { ColMembersService } from 'src/app/_services/col-members.service';
 
@@ -8,17 +9,11 @@ import { ColMembersService } from 'src/app/_services/col-members.service';
   styleUrls: ['./colmember-list.component.css'],
 })
 export class ColmemberListComponent implements OnInit {
-  colMembers: ColMember[];
+  colMembers$: Observable<ColMember[]>;
 
   constructor(private colMemberService: ColMembersService) {}
 
   ngOnInit(): void {
-    this.loadColMembers();
-  }
-
-  loadColMembers() {
-    this.colMemberService.getColMembers().subscribe((colMembers) => {
-      this.colMembers = colMembers;
-    });
+    this.colMembers$ = this.colMemberService.getColMembers();
   }
 }
