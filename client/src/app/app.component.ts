@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
 
   setCurrentUser() {
     const colUser: ColUser = JSON.parse(localStorage.getItem('colUser'));
-    this.colAccountService.setCurrentColUser(colUser);
+    if (colUser) this.colAccountService.setCurrentColUser(colUser);
+    this.colUserType = colUser.colUserType;
   }
 }

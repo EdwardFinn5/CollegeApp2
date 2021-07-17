@@ -29,6 +29,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { SharedModule } from './_modules/shared.module';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { ListsComponent } from './lists/lists.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
     ServerErrorComponent,
     TestErrorsComponent,
     MessagesComponent,
+    ListsComponent,
   ],
   imports: [
     BrowserModule,

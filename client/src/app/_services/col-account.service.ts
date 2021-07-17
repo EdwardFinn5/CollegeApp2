@@ -13,7 +13,7 @@ export class ColAccountService {
   private currentColUserSource = new ReplaySubject<ColUser>(1);
   currentColUser$ = this.currentColUserSource.asObservable();
   colUserType: string;
-  // firstName: string;
+  firstName: string;
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +22,7 @@ export class ColAccountService {
       map((response: ColUser) => {
         const colUser = response;
         if (colUser) {
-          // this.setCurrentColUser(colUser);
+          this.setCurrentColUser(colUser);
           this.colUserType = colUser.colUserType;
           localStorage.setItem('colUser', JSON.stringify(colUser));
           this.currentColUserSource.next(colUser);

@@ -1,0 +1,26 @@
+h2 {
+  font-weight: bold;
+}
+
+textarea {
+  width: 90%;
+}
+
+input {
+  width: 90%;
+}
+
+.img-adminthumbnail {
+  height: 15%;
+  /* width: 15%; */
+}
+
+/* .img-studthumbnail {
+    margin: 25px;
+    width: 85%;
+    height: 85%;
+  } */
+
+.img-studthumbnail {
+  height: 15%;
+}

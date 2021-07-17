@@ -1,0 +1,16 @@
+h2 {
+  font-weight: bold;
+}
+
+textarea {
+  width: 90%;
+}
+
+input {
+  width: 90%;
+}
+
+.img-admin {
+  height: 100px;
+  /* width: 15%; */
+}

@@ -1,1 +1,104 @@
-<p>hs-edit works!</p>
+<div class="row shadow" style="margin-left: 25px" *ngIf="colMember">
+    <div class="col-4">
+        <h2>Please edit your profile:</h2>
+    </div>
+    <div class="col-8">
+        <div class="alert alert-info" *ngIf="editForm.dirty">
+            <strong>Information: </strong>You have made changes. Any unsaved changes will be lost.
+        </div>
+    </div>
+    <!-- <div class="row shadow" style="margin-left: 25px" *ngIf="colMember"> -->
+    <div class="col-4">
+
+        <div class="card">
+            <img src="{{colMember.hsStudentUrl || '../../assets/images/coluser.PNG'}}" alt="{{colMember.firstName}}"
+                class="card-img-top img-studthumbnail">
+            <div class="card-body text-center">
+                <div>
+                    <p> <u><strong>-- {{colMember.firstName}} --</strong></u>
+                        <br>Year in School:<br>
+                        <strong>{{colMember.classYear}}</strong>
+                        <br>High School:<br>
+                        <strong>{{colMember.hsName}}</strong>
+                        <br>High School Location:<br>
+                        <strong>{{colMember.hsLocation}}</strong>
+                        <br>Date Profile was Created:<br>
+                        <strong>{{colMember.created | date: "MM/dd/yyyy"}}</strong>
+                        <br>Date Last Active:<br>
+                        <strong>{{colMember.lastActive | date: "MM/dd/yyyy"}}</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group d-flex">
+                    <button [disabled]="!editForm.dirty" form="editForm" type="submit" class="btn btn-success mr-2">Save Changes</button>
+                    <button routerLink='/hsdetail/{{colMember.colUsername}}' class="btn btn-primary">See
+                        Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-8">
+
+        <tabset class="member-tabset">
+
+            <tab heading='Edit Profile Content'>
+                <form #scrolMe style="overflow: scroll; height: 500px; width: 450px;"
+                    [scrollTop]="scrolMe.scrollHeight"
+                    #editForm="ngForm" id="editForm" (ngSubmit)="updateColMember()">
+
+                    <h5 class="mt-1 mb-2"><strong><u>Card Information</u></strong></h5>
+                    <div class="form-inline mt-2">
+                        <label for="firstName"><strong>First Name:</strong></label>
+                        <input [(ngModel)]="colMember.firstName" type="text" name="firstName"
+                            class="form-control mb-2 ml-2">
+                    </div>
+                    <div class="form-inline mt-2">
+                        <label for="lastName"><strong>Last Name:</strong></label>
+                        <input [(ngModel)]="colMember.lastName" type="text" name="lastName"
+                            class="form-control mb-2 ml-2">
+                    </div>
+                    <div class="form-inline mt-2">
+                        <label for="classYear"><strong>Year in School:</strong></label>
+                        <input [(ngModel)]="colMember.classYear" type="text" name="classYear"
+                            class="form-control mb-2 ml-2">
+                    </div>
+                    <div class="form-inline mt-2">
+                        <label for="hsName"><strong>High School:</strong></label>
+                        <input [(ngModel)]="colMember.hsName" type="text" name="hsName" class="form-control mb-2 ml-2">
+                    </div>
+                    <div class="form-inline">
+                        <label for="hsLocation" mb-2><strong>High School Location:</strong></label>
+                        <input [(ngModel)]="colMember.hsLocation" type="text" name="hsLocation"
+                            class="form-control mb-2 ml-2" mb-2>
+                    </div>
+
+                    <h5><strong><u>Academic Information</u></strong></h5>
+
+                    <div class="form-inline">
+                        <label for="gpa" mb-2><strong>GPA:</strong></label>
+                        <input [(ngModel)]="colMember.gpa" type="text" name="gpa" class="form-control mb-2 ml-2" mb-2>
+                    </div>
+                    <div class="form-inline">
+                        <label for="proposedMajor" mb-2><strong>Possible Major:</strong></label>
+                        <input [(ngModel)]="colMember.proposedMajor" type="text" name="proposedMajor"
+                            class="form-control mb-2 ml-2" mb-2>
+                    </div>
+
+                    <label for="extraCurricular"><strong>Extra-Curricular Activities:</strong></label>
+                    <textarea [(ngModel)]="colMember.extraCurricular" name="extraCurricular" class="form-control mb-2"
+                        rows="3"></textarea>
+                    <label for="dreamJob"><strong>Description of Dream Job:</strong></label>
+                    <textarea [(ngModel)]="colMember.dreamJob" name="dreamJob" class="form-control mb-2"
+                        rows="3"></textarea>
+
+                </form>
+            </tab>
+
+            <tab heading='Edit Your Photo'>
+                <!-- <app-photo-editor [colMember]="colMember"></app-photo-editor> -->
+            </tab>
+
+        </tabset>
+    </div>
