@@ -43,34 +43,36 @@ namespace API.Controllers
             return await _colUserRepository.GetColMemberAsync(colUsername);
         }
 
-        // [HttpPut]
-        // public async Task<ActionResult> UpdateColUser(ColMemberUpdateDto colMemberUpdateDto)
-        // {
-        //     var colUser = await _colUserRepository.GetColUserByUsernameAsync(User.GetColUserName());
+        [HttpPut]
+        public async Task<ActionResult> UpdateColUser(ColMemberUpdateDto colMemberUpdateDto)
+        {
+            var colUsername = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        //     _mapper.Map(colMemberUpdateDto, colUser);
+            var colUser = await _colUserRepository.GetColUserByUsernameAsync(User.GetColUserName());
 
-        //     _colUserRepository.Update(colUser);
+            _mapper.Map(colMemberUpdateDto, colUser);
 
-        //     if (await _colUserRepository.SaveAllAsync()) return NoContent();
+            _colUserRepository.Update(colUser);
 
-        //     // _unitOfWork.UserRepository.Update(user);
+            if (await _colUserRepository.SaveAllAsync()) return NoContent();
 
-        //     // var collegePrep = new CollegePrep
-        //     // {
-        //     //     AcademicPlus = memberUpdateDto.AcademicPlus
-        //     // };
+            // _unitOfWork.UserRepository.Update(user);
 
-        //     // user.CollegePreps.Add(collegePrep);
+            // var collegePrep = new CollegePrep
+            // {
+            //     AcademicPlus = memberUpdateDto.AcademicPlus
+            // };
 
-        //     // user.CollegePreps.a Entry(user.CollegePreps.AcademicPlus).State = EntityState.Modified;
+            // user.CollegePreps.Add(collegePrep);
 
-        //     // _context.Entry(user).State = EntityState.Modified;
+            // user.CollegePreps.a Entry(user.CollegePreps.AcademicPlus).State = EntityState.Modified;
 
-        //     // if (await _unitOfWork.Complete()) return NoContent();
+            // _context.Entry(user).State = EntityState.Modified;
 
-        //     return BadRequest("Failed to update colUser");
-        // }
+            // if (await _unitOfWork.Complete()) return NoContent();
+
+            return BadRequest("Failed to update colUser");
+        }
 
 
 
