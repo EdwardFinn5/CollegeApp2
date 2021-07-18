@@ -12,17 +12,23 @@ import { ColAccountService } from '../_services/col-account.service';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  // colUser: ColUser;
-  // currentColUser$: Observable<ColUser>;
-  // colUserType = 'ColLead';
 
   constructor(
-    private route: Router,
-    public colAccountService: ColAccountService
+    public colAccountService: ColAccountService,
+    private route: Router
   ) {}
 
-  ngOnInit(): void {
-    // this.currentColUser$ = this.colAccountService.currentColUser$;
+  ngOnInit(): void {}
+
+  login() {
+    this.colAccountService.colLogin(this.model).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   logout() {

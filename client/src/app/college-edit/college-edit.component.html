@@ -41,11 +41,13 @@
 
         <tabset class="member-tabset">
             <tab heading='Edit Profile Content'>
-                <form
+                <!-- <form
                     #scrolMe
                     style="overflow: scroll; height: 500px; width: 450px;"
                     [scrollTop]="scrolMe.scrollHeight"
-                    #editForm="ngForm" id="editForm" (ngSubmit)="updateColMember()">
+                    #editForm="ngForm" id="editForm" (ngSubmit)="updateColMember()"> -->
+
+                    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateColMember()"> 
                     
                     <h5 class="mt-1 mb-2"><strong><u>Card Information</u></strong></h5>
                 <div class="form-inline mt-2">

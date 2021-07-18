@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -106,9 +107,9 @@ namespace API.Controllers
                 ColUserName = colUser.ColUserName,
                 Token = _tokenService.CreateToken(colUser),
                 ColUserType = colUser.ColUserType,
-                FirstName = colUser.FirstName
-                // ColUrl = colUser.ColPhotos.FirstOrDefault(x => x.IsMainCol)?.ColUrl,
-                // HsStudentUrl = colUser.ColPhotos.FirstOrDefault(x => x.IsMainHs)?.HsStudentUrl
+                FirstName = colUser.FirstName,
+                ColUrl = colUser.ColPhotos.FirstOrDefault(x => x.IsMainCol)?.ColUrl,
+                HsStudentUrl = colUser.ColPhotos.FirstOrDefault(x => x.IsMainHs)?.HsStudentUrl
             };
 
         }

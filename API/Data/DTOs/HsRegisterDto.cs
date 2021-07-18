@@ -25,7 +25,7 @@ namespace API.DTOs
         [StringLength(8, MinimumLength = 4)]
         public string Password { get; set; }
 
-        // public string ColUserType { get; set; } = "ColLead";
+        public string ColUserType { get; set; } = "ColLead";
 
     }
 }

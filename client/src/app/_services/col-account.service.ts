@@ -26,6 +26,7 @@ export class ColAccountService {
           this.colUserType = colUser.colUserType;
           localStorage.setItem('colUser', JSON.stringify(colUser));
           this.currentColUserSource.next(colUser);
+          console.log(colUser.colUserType);
         }
       })
     );
@@ -37,8 +38,11 @@ export class ColAccountService {
       .pipe(
         map((colUser: ColUser) => {
           if (colUser) {
-            colUser.colUserType = 'College';
             this.setCurrentColUser(colUser);
+            this.colUserType = colUser.colUserType;
+            localStorage.setItem('colUser', JSON.stringify(colUser));
+            this.currentColUserSource.next(colUser);
+            console.log(colUser.colUserType);
             // this.currentColUserSource.next(colUser);
             // this.colUserType = colUser.colUserType;
           }
@@ -51,8 +55,11 @@ export class ColAccountService {
     return this.http.post(this.baseUrl + 'colaccount/hsregister', model).pipe(
       map((colUser: ColUser) => {
         if (colUser) {
-          colUser.colUserType = 'ColLead';
           this.setCurrentColUser(colUser);
+          this.colUserType = colUser.colUserType;
+          localStorage.setItem('colUser', JSON.stringify(colUser));
+          this.currentColUserSource.next(colUser);
+          console.log(colUser.colUserType);
           // this.currentColUserSource.next(colUser);
           // this.colUserType = colUser.colUserType;
         }
@@ -62,9 +69,9 @@ export class ColAccountService {
   }
 
   setCurrentColUser(colUser: ColUser) {
-    localStorage.setItem('colUser', JSON.stringify(colUser));
+    // localStorage.setItem('colUser', JSON.stringify(colUser));
     this.currentColUserSource.next(colUser);
-    // this.colUserType = colUser.colUserType;
+    this.colUserType = colUser.colUserType;
   }
 
   logout() {
