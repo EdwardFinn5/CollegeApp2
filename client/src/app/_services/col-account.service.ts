@@ -24,8 +24,8 @@ export class ColAccountService {
         if (colUser) {
           this.setCurrentColUser(colUser);
           this.colUserType = colUser.colUserType;
-          localStorage.setItem('colUser', JSON.stringify(colUser));
-          this.currentColUserSource.next(colUser);
+          // localStorage.setItem('colUser', JSON.stringify(colUser));
+          // this.currentColUserSource.next(colUser);
           console.log(colUser.colUserType);
         }
       })
@@ -40,8 +40,8 @@ export class ColAccountService {
           if (colUser) {
             this.setCurrentColUser(colUser);
             this.colUserType = colUser.colUserType;
-            localStorage.setItem('colUser', JSON.stringify(colUser));
-            this.currentColUserSource.next(colUser);
+            // localStorage.setItem('colUser', JSON.stringify(colUser));
+            // this.currentColUserSource.next(colUser);
             console.log(colUser.colUserType);
             // this.currentColUserSource.next(colUser);
             // this.colUserType = colUser.colUserType;
@@ -57,8 +57,8 @@ export class ColAccountService {
         if (colUser) {
           this.setCurrentColUser(colUser);
           this.colUserType = colUser.colUserType;
-          localStorage.setItem('colUser', JSON.stringify(colUser));
-          this.currentColUserSource.next(colUser);
+          // localStorage.setItem('colUser', JSON.stringify(colUser));
+          // this.currentColUserSource.next(colUser);
           console.log(colUser.colUserType);
           // this.currentColUserSource.next(colUser);
           // this.colUserType = colUser.colUserType;
@@ -69,7 +69,7 @@ export class ColAccountService {
   }
 
   setCurrentColUser(colUser: ColUser) {
-    // localStorage.setItem('colUser', JSON.stringify(colUser));
+    localStorage.setItem('colUser', JSON.stringify(colUser));
     this.currentColUserSource.next(colUser);
     this.colUserType = colUser.colUserType;
   }

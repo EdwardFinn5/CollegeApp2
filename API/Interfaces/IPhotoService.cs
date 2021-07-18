@@ -1,13 +1,13 @@
-// using System.Threading.Tasks;
-// using CloudinaryDotNet.Actions;
-// using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Http;
 
-// namespace API.Interfaces
-// {
-//     public interface IPhotoService
-//     {
-//         Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
+namespace API.Interfaces
+{
+    public interface IPhotoService
+    {
+        Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
 
-//         Task<DeletionResult> DeletePhotoAsync(string publicId);
-//     }
-// }
+        Task<DeletionResult> DeletePhotoAsync(string publicId);
+    }
+}

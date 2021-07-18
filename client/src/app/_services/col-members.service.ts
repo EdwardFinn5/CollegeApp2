@@ -40,4 +40,17 @@ export class ColMembersService {
       })
     );
   }
+
+  setMainPhoto(photoId: number) {
+    return this.http.put(
+      this.baseUrl + 'colUsers/set-main-photo/' + photoId,
+      {}
+    );
+  }
+
+  deletePhoto(colPhotoId: number) {
+    return this.http.delete(
+      this.baseUrl + 'colUsers/delete-colPhoto/' + colPhotoId
+    );
+  }
 }
