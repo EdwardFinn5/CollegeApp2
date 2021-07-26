@@ -32,6 +32,8 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { ListsComponent } from './lists/lists.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { DateInputComponent } from './_forms/date-input/date-input.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
     TestErrorsComponent,
     MessagesComponent,
     ListsComponent,
+    TextInputComponent,
+    DateInputComponent,
   ],
   imports: [
     BrowserModule,

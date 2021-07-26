@@ -9,6 +9,5 @@ namespace API.DTOs
         public string ColUrl { get; set; }
         public string HsStudentUrl { get; set; }
 
-
     }
 }

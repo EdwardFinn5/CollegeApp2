@@ -101,6 +101,11 @@ export class PhotoEditorComponent implements OnInit {
           this.colMember.hsStudentUrl = colPhoto.hsStudentUrl;
           this.colAccountService.setCurrentColUser(this.colUser);
         }
+        if (colPhoto.isMainCol) {
+          this.colUser.colUrl = colPhoto.colUrl;
+          this.colMember.colUrl = colPhoto.colUrl;
+          this.colAccountService.setCurrentColUser(this.colUser);
+        }
       }
     };
   }

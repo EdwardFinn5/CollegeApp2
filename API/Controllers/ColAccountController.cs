@@ -6,6 +6,7 @@ using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,8 +16,10 @@ namespace API.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
-        public ColAccountController(DataContext context, ITokenService tokenService)
+        private readonly IMapper _mapper;
+        public ColAccountController(DataContext context, ITokenService tokenService, IMapper mapper)
         {
+            _mapper = mapper;
             _tokenService = tokenService;
             _context = context;
         }
@@ -26,15 +29,14 @@ namespace API.Controllers
         {
             if (await ColUserExists(hsRegisterDto.ColUsername)) return BadRequest("Username is taken");
 
+            var colUser = _mapper.Map<ColUser>(hsRegisterDto);
+
             using var hmac = new HMACSHA512();
 
-            var colUser = new ColUser
-            {
-                ColUserName = hsRegisterDto.ColUsername.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(hsRegisterDto.Password)),
-                PasswordSalt = hmac.Key,
-                ColUserType = "ColLead"
-            };
+            colUser.ColUserName = hsRegisterDto.ColUsername.ToLower();
+            colUser.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(hsRegisterDto.Password));
+            colUser.PasswordSalt = hmac.Key;
+            colUser.ColUserType = "ColLead";
 
             _context.ColUsers.Add(colUser);
             await _context.SaveChangesAsync();
@@ -45,6 +47,7 @@ namespace API.Controllers
                 Token = _tokenService.CreateToken(colUser),
                 ColUserType = colUser.ColUserType,
                 FirstName = colUser.FirstName,
+
                 // ColUrl = colUser.ColPhotos.FirstOrDefault(x => x.IsMainCol)?.ColUrl,
                 // HsStudentUrl = colUser.ColPhotos.FirstOrDefault(x => x.IsMainHs)?.HsStudentUrl
             };
@@ -55,15 +58,14 @@ namespace API.Controllers
         {
             if (await ColUserExists(colRegisterDto.ColUsername)) return BadRequest("Username is taken");
 
+            var colUser = _mapper.Map<ColUser>(colRegisterDto);
+
             using var hmac = new HMACSHA512();
 
-            var colUser = new ColUser
-            {
-                ColUserName = colRegisterDto.ColUsername.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(colRegisterDto.Password)),
-                PasswordSalt = hmac.Key,
-                ColUserType = "College"
-            };
+            colUser.ColUserName = colRegisterDto.ColUsername.ToLower();
+            colUser.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(colRegisterDto.Password));
+            colUser.PasswordSalt = hmac.Key;
+            colUser.ColUserType = "College";
 
             _context.ColUsers.Add(colUser);
             await _context.SaveChangesAsync();

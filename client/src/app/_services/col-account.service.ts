@@ -46,7 +46,7 @@ export class ColAccountService {
             // this.currentColUserSource.next(colUser);
             // this.colUserType = colUser.colUserType;
           }
-          // return colUser;
+          return colUser;
         })
       );
   }
@@ -63,7 +63,7 @@ export class ColAccountService {
           // this.currentColUserSource.next(colUser);
           // this.colUserType = colUser.colUserType;
         }
-        // return colUser;
+        return colUser;
       })
     );
   }

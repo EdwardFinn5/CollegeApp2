@@ -8,16 +8,16 @@ namespace API.DTOs
         // [EmailAddress]
         public string ColUsername { get; set; }
 
-        // [Required]
+        [Required]
         public string FirstName { get; set; }
 
-        // [Required]
+        [Required]
         public string ClassYear { get; set; }
 
-        // [Required]
+        [Required]
         public string HsName { get; set; }
 
-        // [Required]
+        [Required]
         public string HsLocation { get; set; }
 
 

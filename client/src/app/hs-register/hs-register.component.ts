@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
@@ -10,8 +9,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ColUser } from '../_models/colUser';
-// import { ToastrService } from 'ngx-toastr';
 import { ColAccountService } from '../_services/col-account.service';
 
 @Component({
@@ -22,13 +19,10 @@ import { ColAccountService } from '../_services/col-account.service';
 export class HsRegisterComponent implements OnInit {
   @Output() cancelHsRegister = new EventEmitter();
   registerForm: FormGroup;
-  colUserType = 'ColLead';
   validationErrors: string[] = [];
-  model: any = {};
 
   constructor(
     private colAccountService: ColAccountService,
-    private http: HttpClient,
     private toastr: ToastrService,
     private router: Router,
     private fb: FormBuilder
@@ -68,15 +62,13 @@ export class HsRegisterComponent implements OnInit {
   }
 
   hsRegister() {
-    this.colAccountService.hsRegister(this.model).subscribe(
+    this.colAccountService.hsRegister(this.registerForm.value).subscribe(
       (response) => {
-        console.log(response);
         this.cancel();
         this.router.navigateByUrl('/colmembers');
       },
       (error) => {
         console.log(error);
-        this.toastr.error(error.error);
         this.validationErrors = error;
       }
     );

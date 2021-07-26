@@ -56,7 +56,7 @@
 
   <div *ngIf="colAccountService.colUserType == 'College'">
     <div class="dropdown" *ngIf="(colAccountService.currentColUser$ | async) as colUser" dropdown>
-      <img src="{{colUser.colUrl}}" alt="{{colUser.collegeName}}">
+      <img src="{{colUser.colUrl  || '../../assets/images/coluser.PNG'}}" alt="{{colUser.collegeName}}">
     
         <a class="dropdown-toggle text-light ml-2" style="font-size: 1.3em" dropdownToggle>Welcome {{colUser.firstName | titlecase}} </a>
         <div class="dropdown-menu mt-3" *dropdownMenu>

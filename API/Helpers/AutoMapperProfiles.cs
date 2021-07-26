@@ -20,6 +20,7 @@ namespace API.Helpers
             CreateMap<FactFeature, FactFeatureDto>();
             CreateMap<ColMemberUpdateDto, ColUser>();
             CreateMap<HsRegisterDto, ColUser>();
+            CreateMap<ColRegisterDto, ColUser>();
         }
     }
 }
