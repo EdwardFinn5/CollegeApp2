@@ -126,6 +126,25 @@ export class ColMembersService {
     );
   }
 
+  addLike(colUsername: string) {
+    return this.http.post(this.baseUrl + 'likes/' + colUsername, {});
+  }
+
+  getLikes(predicate: string, pageNumber, pageSize) {
+    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+    return this.getPaginatedResults<Partial<ColMember[]>>(
+      this.baseUrl + 'likes',
+      params
+    );
+  }
+
+  // getLikes(predicate: string) {
+  //   return this.http.get<Partial<ColMember[]>>(
+  //     this.baseUrl + 'likes?predicate=' + predicate
+  //   );
+  // }
+
   private getPaginatedResults<T>(url, params) {
     const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
     return this.http

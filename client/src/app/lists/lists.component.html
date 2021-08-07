@@ -1,1 +1,85 @@
-<p>lists works!</p>
+<div class="container">
+
+    <ng-container *ngIf="colUser.colUserType == 'College'">
+        <div class="text-centered mt-3">
+            <h2>{{predicate === 'liked' ? 'HS students who might be good fit for your college' : 'Students who have indicated your college might be a good fit' }}</h2>
+        </div>
+    
+        <div class="container mt-3">
+            <div class="row">
+                <div class="btn-group" name="predicate"> 
+    
+                    <button class="btn btn-primary" 
+                    btnRadio="liked" 
+                    [(ngModel)]="predicate" 
+                    (click)="loadLikes()">
+                    Students we like
+                    </button>
+    
+                    <button class="btn btn-success ml-4" 
+                    btnRadio="likedBy" 
+                    [(ngModel)]="predicate" 
+                    (click)="loadLikes()">
+                    Students who like our college
+                    </button>
+    
+                </div>
+            </div>
+    
+            <div class="row mt-3">
+                <div class="col-4" *ngFor="let colMember of colMembers">
+                    <app-colmember-card [colMember]="colMember"></app-colmember-card>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    
+    <ng-container *ngIf="colUser.colUserType == 'ColLead'">
+        <div class="text-centered mt-3">
+            <h2>{{predicate === 'liked' ? 'Colleges that might be good fit for me' : 'Colleges that have indicated I might be a good fit' }}</h2>
+        </div>
+    
+        <div class="container mt-3">
+            <div class="row">
+                <div class="btn-group" name="predicate"> 
+    
+                    <button class="btn btn-primary" 
+                    btnRadio="liked" 
+                    [(ngModel)]="predicate" 
+                    (click)="loadLikes()">
+                    Colleges I like
+                    </button>
+    
+                    <button class="btn btn-success ml-4" 
+                    btnRadio="likedBy" 
+                    [(ngModel)]="predicate" 
+                    (click)="loadLikes()">
+                    Colleges that like me 
+                    </button>
+    
+                </div>
+            </div>
+    
+            <div class="row mt-3">
+                <div class="col-4" *ngFor="let colMember of colMembers">
+                    <app-colmember-card [colMember]="colMember"></app-colmember-card>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <div class="d-flex justify-content-center mt-3" *ngIf="pagination">
+        <pagination 
+            [boundaryLinks]="true" 
+            [totalItems]="pagination.totalItems"
+            [itemsPerPage]="pagination.itemsPerPage"
+            [(ngModel)]="pagination.currentPage"
+            (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" 
+            nextText="&rsaquo;" 
+            firstText="&laquo;" 
+            lastText="&raquo;">
+    </pagination>
+    </div>
+    
+    

@@ -14,7 +14,7 @@ namespace API.Data
         public DbSet<MajorCat> MajorCats { get; set; }
         public DbSet<ColPhoto> ColPhotos { get; set; }
         public DbSet<FactFeature> FactFeatures { get; set; }
-        // public DbSet<UserLike> Likes { get; set; }
+        public DbSet<ColUserLike> Likes { get; set; }
         // public DbSet<Message> Messages { get; set; }
         // public DbSet<Group> Groups { get; set; }
         // public DbSet<Connection> Connections { get; set; }
@@ -62,20 +62,20 @@ namespace API.Data
                 .HasForeignKey(ff => ff.CollegeNum)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // modelBuilder.Entity<UserLike>()
-            //     .HasKey(k => new { k.SourceUserId, k.LikedUserId });
+            modelBuilder.Entity<ColUserLike>()
+                .HasKey(k => new { k.SourceColUserId, k.LikedColUserId });
 
-            // modelBuilder.Entity<UserLike>()
-            //     .HasOne(s => s.SourceUser)
-            //     .WithMany(l => l.LikedUsers)
-            //     .HasForeignKey(s => s.SourceUserId)
-            //     .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ColUserLike>()
+                .HasOne(s => s.SourceColUser)
+                .WithMany(l => l.LikedColUsers)
+                .HasForeignKey(s => s.SourceColUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
-            // modelBuilder.Entity<UserLike>()
-            //     .HasOne(s => s.LikedUser)
-            //     .WithMany(l => l.LikedByUsers)
-            //     .HasForeignKey(s => s.LikedUserId)
-            //     .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ColUserLike>()
+                .HasOne(s => s.LikedColUser)
+                .WithMany(l => l.LikedByColUsers)
+                .HasForeignKey(s => s.LikedColUserId)
+                .OnDelete(DeleteBehavior.NoAction);
 
             // modelBuilder.Entity<Message>()
             //     .HasOne(u => u.Recipient)

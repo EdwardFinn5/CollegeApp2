@@ -54,6 +54,8 @@ namespace API.Entities
         public ICollection<ColPhoto> ColPhotos { get; set; }
         public ICollection<CollegeMajor> CollegeMajors { get; set; }
         public ICollection<FactFeature> FactFeatures { get; set; }
+        public ICollection<ColUserLike> LikedByColUsers { get; set; }
+        public ICollection<ColUserLike> LikedColUsers { get; set; }
 
     }
 }

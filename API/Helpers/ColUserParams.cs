@@ -1,16 +1,7 @@
 namespace API.Helpers
 {
-    public class ColUserParams
+    public class ColUserParams : ColPaginationParams
     {
-        private const int MaxPageSize = 50;
-        public int PageNumber { get; set; } = 1;
-        private int _pageSize = 10;
-        public int PageSize
-        {
-            get => _pageSize;
-            set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
-        }
-
         public string CurrentColUsername { get; set; }
         public string ColUserType { get; set; }
         public int MinEnrollment { get; set; } = 300;
