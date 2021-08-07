@@ -6,7 +6,7 @@ namespace API.Extensions
     {
         public static string GetColUserName(this ClaimsPrincipal user)
         {
-            return user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            return user.FindFirst(ClaimTypes.Name)?.Value;
         }
 
         public static int GetColUserId(this ClaimsPrincipal colUser)

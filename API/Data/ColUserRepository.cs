@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -30,11 +31,41 @@ namespace API.Data
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<ColMemberDto>> GetColMembersAsync()
+        public async Task<PagedList<ColMemberDto>> GetColMembersAsync(ColUserParams colUserParams)
         {
-            return await _context.ColUsers
-                .ProjectTo<ColMemberDto>(_mapper.ConfigurationProvider)
-                .ToListAsync();
+            var query = _context.ColUsers.AsQueryable();
+
+            query = query.Where(u => u.ColUserName != colUserParams.CurrentColUsername);
+            query = query.Where(u => u.ColUserType == colUserParams.ColUserType);
+
+            if (colUserParams.ColUserType == "College")
+            {
+                query = query.Where(u => u.CollegeLocation == colUserParams.CollegeLocation);
+                query = query.Where(u => u.CollegeEnrollment >= colUserParams.MinEnrollment && u.CollegeEnrollment <= colUserParams.MaxEnrollment);
+
+                query = colUserParams.OrderBy switch
+                {
+                    "created" => query.OrderByDescending(u => u.Created),
+                    _ => query.OrderByDescending(u => u.LastActive)
+                };
+            }
+
+            if (colUserParams.ColUserType == "ColLead")
+            {
+                query = query.Where(u => u.ClassYear == colUserParams.ClassYear);
+                query = query.Where(u => u.ProposedMajor == colUserParams.ProposedMajor);
+
+                query = colUserParams.OrderBy switch
+                {
+                    "created" => query.OrderByDescending(u => u.Created),
+                    _ => query.OrderByDescending(u => u.LastActive)
+                };
+            }
+
+
+            return await PagedList<ColMemberDto>.CreateAsync(
+                query.ProjectTo<ColMemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                colUserParams.PageNumber, colUserParams.PageSize);
         }
 
         public async Task<ColUser> GetColUserByIdAsync(int coluserid)

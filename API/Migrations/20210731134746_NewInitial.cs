@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class NewInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,7 @@ namespace API.Data.Migrations
                     CollegeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CollegeNickname = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CollegeLocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CollegeEnrollment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CollegeEnrollment = table.Column<int>(type: "int", nullable: false),
                     Tuition = table.Column<int>(type: "int", nullable: false),
                     RoomAndBoard = table.Column<int>(type: "int", nullable: false),
                     AverageAid = table.Column<int>(type: "int", nullable: false),

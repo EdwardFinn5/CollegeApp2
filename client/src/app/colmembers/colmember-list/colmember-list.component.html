@@ -1,7 +1,127 @@
+<div class="text-center mt-3">
+    <h2>Number of filtered items: {{pagination?.totalItems}} items found</h2>
+</div>
+
+<div class="container" mt-3>
+    <form #form="ngForm" class="form-inline mb-3" (ngSubmit)= "loadColMembers()" autocomplete="off">
+        
+        <ng-container *ngIf="colUserParams.colUserType === 'College'" >
+            
+            <div class="form-group px-2">
+                <label>Choose Type: </label>
+                <select name="colUserType" style="width: 130px" [(ngModel)]="colUserParams.colUserType" class="form-control ml-1">
+                    <option *ngFor="let colUserType of colUserTypeList" [value]="colUserType.value">
+                        {{colUserType.display}}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>College enrollment range - from:</label>
+                <input type="number" class="form-control ml-1" style="width: 70px;" 
+                    name="minEnrollment" 
+                    [(ngModel)]="colUserParams.minEnrollment">
+            </div>
+            <div class="form-group p-xxl-2">
+                <label>to:</label>
+                <input type="number" class="form-control ml-1" style="width: 70px;" 
+                    name="maxEnrollment" 
+                    [(ngModel)]="colUserParams.maxEnrollment">
+            </div>
+    
+            <div class="form-group px-2">
+                <label>Choose City: </label>
+                <select name="collegeLocation" style="width: 130px" [(ngModel)]="colUserParams.collegeLocation" class="form-control ml-1">
+                    <option *ngFor="let collegeLocation of collegeLocationList" [value]="collegeLocation.value">
+                        {{collegeLocation.display}}
+                    </option>
+                </select>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="colUserParams.colUserType === 'ColLead'" >
+            
+            <div class="form-group px-2">
+                <label>Choose Type: </label>
+                <select name="colUserType" style="width: 130px" [(ngModel)]="colUserParams.colUserType" class="form-control ml-1">
+                    <option *ngFor="let colUserType of colUserTypeList" [value]="colUserType.value">
+                        {{colUserType.display}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group px-2">
+                <label>Choose Class Year: </label>
+                <select name="classYear" style="width: 130px" [(ngModel)]="colUserParams.classYear" class="form-control ml-1">
+                    <option *ngFor="let classYear of classYearList" [value]="classYear.value">
+                        {{classYear.display}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group px-2">
+                <label>Choose Proposed Major: </label>
+                <select name="proposedMajor" style="width: 130px" [(ngModel)]="colUserParams.proposedMajor" class="form-control ml-1">
+                    <option *ngFor="let proposedMajor of proposedMajorList" [value]="proposedMajor.value">
+                        {{proposedMajor.display}}
+                    </option>
+                </select>
+            </div>
+            
+        </ng-container>
+        
+     
+
+        <button class="btn btn-primary ml-1" type="submit">Apply Filters</button>
+        <button (click)="resetFilters()" class="btn btn-info ml-1" type="submit">Reset Filters</button>
+
+        <div class="col">
+
+            <div class="btn-group float-right">
+                <button 
+                    type="button"
+                    class="btn btn-primary" 
+                    name='orderBy' 
+                    (click)="loadColMembers()"
+                    btnRadio='lastActive'
+                    [(ngModel)]="colUserParams.orderBy">
+                    Last Active
+                </button>
+                <button 
+                    type="button"
+                    class="btn btn-primary" 
+                    name='orderBy' 
+                    (click)="loadColMembers()"
+                    btnRadio='created'
+                    [(ngModel)]="colUserParams.orderBy">
+                    Newest Members
+                </button>
+            </div>
+
+        </div>
+
+        
+
+    </form>
+</div>
+
 <div class="container">
     <div class="row">
-        <div *ngFor="let colMember of colMembers$ | async" class="shadow-sm col-lg-4 col-md-6 p-3 my-1">
+        <div *ngFor="let colMember of colMembers" class="shadow-sm col-lg-4 col-md-6 p-3 my-1">
             <app-colmember-card [colMember]="colMember"></app-colmember-card>
         </div>
     </div>
+</div>
+
+<div class="d-flex justify-content-center mt-3" *ngIf="pagination">
+    <pagination 
+        [boundaryLinks]="true" 
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" 
+        nextText="&rsaquo;" 
+        firstText="&laquo;" 
+        lastText="&raquo;">
+</pagination>
 </div>

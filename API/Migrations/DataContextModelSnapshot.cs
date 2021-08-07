@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -100,8 +100,8 @@ namespace API.Data.Migrations
                     b.Property<string>("CollegeEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CollegeEnrollment")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CollegeEnrollment")
+                        .HasColumnType("int");
 
                     b.Property<string>("CollegeLocation")
                         .HasColumnType("nvarchar(max)");

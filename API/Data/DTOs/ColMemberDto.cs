@@ -29,7 +29,7 @@ namespace API.DTOs
         public string CollegeName { get; set; }
         public string CollegeNickname { get; set; }
         public string CollegeLocation { get; set; }
-        public string CollegeEnrollment { get; set; }
+        public int CollegeEnrollment { get; set; }
         public int Tuition { get; set; }
         public int RoomAndBoard { get; set; }
         public int AverageAid { get; set; }

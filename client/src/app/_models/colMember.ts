@@ -23,7 +23,7 @@ export interface ColMember {
   collegeName: string;
   collegeNickname: string;
   collegeLocation: string;
-  collegeEnrollment: string;
+  collegeEnrollment: number;
   tuition: number;
   roomAndBoard: number;
   averageAid: number;

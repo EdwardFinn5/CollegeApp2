@@ -17,8 +17,8 @@ namespace API.DTOs
         [Required]
         public string FirstName { get; set; }
         [Required]
-        public string CollegeLocation { get; set; }
+        public string CollegeLocation { get; set; } = "Des Moines";
         [Required]
-        public string CollegeEnrollment { get; set; }
+        public int CollegeEnrollment { get; set; }
     }
 }

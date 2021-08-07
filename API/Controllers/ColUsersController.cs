@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -30,9 +31,24 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ColMemberDto>>> GetColUsers()
+        public async Task<ActionResult<IEnumerable<ColMemberDto>>> GetColUsers([FromQuery] ColUserParams colUserParams)
         {
-            var colUsers = await _colUserRepository.GetColMembersAsync();
+            var colUser = await _colUserRepository.GetColUserByUsernameAsync(User.GetColUserName());
+            colUserParams.CurrentColUsername = colUser.ColUserName;
+
+            if (string.IsNullOrEmpty(colUserParams.ColUserType))
+                colUserParams.ColUserType = colUser.ColUserType == "College" ? "ColLead" : "College";
+
+            // if (string.IsNullOrEmpty(colUserParams.CollegeLocation))
+            //     colUserParams.CollegeLocation = colUser.CollegeLocation == "Des Moines, IA" ? "Cedar Rapids, IA" : "Des Moines, IA";
+
+
+            var colUsers = await _colUserRepository.GetColMembersAsync(colUserParams);
+
+            Response.AddPaginationHeader(colUsers.CurrentPage,
+                                        colUsers.PageSize,
+                                        colUsers.TotalCount,
+                                        colUsers.TotalPages);
 
             return Ok(colUsers);
         }

@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210703192759_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210731134746_NewInitial")]
+    partial class NewInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,8 +102,8 @@ namespace API.Data.Migrations
                     b.Property<string>("CollegeEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CollegeEnrollment")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CollegeEnrollment")
+                        .HasColumnType("int");
 
                     b.Property<string>("CollegeLocation")
                         .HasColumnType("nvarchar(max)");
