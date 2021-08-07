@@ -36,16 +36,8 @@ export class ColmemberListComponent implements OnInit {
     { value: 'Finance', display: 'Finance' },
   ];
 
-  constructor(
-    private colMemberService: ColMembersService,
-    private colAccountService: ColAccountService
-  ) {
-    this.colAccountService.currentColUser$
-      .pipe(take(1))
-      .subscribe((colUser) => {
-        this.colUser = colUser;
-        this.colUserParams = new ColUserParams(colUser);
-      });
+  constructor(private colMemberService: ColMembersService) {
+    this.colUserParams = this.colMemberService.getColUserParams();
   }
 
   ngOnInit(): void {
@@ -53,6 +45,7 @@ export class ColmemberListComponent implements OnInit {
   }
 
   loadColMembers() {
+    this.colMemberService.setColUserParams(this.colUserParams);
     this.colMemberService
       .getColMembers(this.colUserParams)
       .subscribe((response) => {
@@ -62,12 +55,13 @@ export class ColmemberListComponent implements OnInit {
   }
 
   resetFilters() {
-    this.colUserParams = new ColUserParams(this.colUser);
+    this.colUserParams = this.colMemberService.resetColUserParams();
     this.loadColMembers();
   }
 
   pageChanged(event: any) {
     this.colUserParams.pageNumber = event.page;
+    this.colMemberService.setColUserParams(this.colUserParams);
     this.loadColMembers();
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { of, pipe } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ColMember } from '../_models/colMember';
 import { ColUser } from '../_models/colUser';
@@ -16,14 +16,43 @@ export class ColMembersService {
   baseUrl = environment.apiUrl;
   colMembers: ColMember[] = [];
   colUserType: string;
+  colMemberCache = new Map();
+  colUser: ColUser;
+  colUserParams: ColUserParams;
 
   constructor(
     private http: HttpClient,
     private colAccountService: ColAccountService
-  ) {}
+  ) {
+    this.colAccountService.currentColUser$
+      .pipe(take(1))
+      .subscribe((colUser) => {
+        this.colUser = colUser;
+        this.colUserParams = new ColUserParams(colUser);
+      });
+  }
+
+  getColUserParams() {
+    return this.colUserParams;
+  }
+
+  setColUserParams(params: ColUserParams) {
+    this.colUserParams = params;
+  }
+
+  resetColUserParams() {
+    this.colUserParams = new ColUserParams(this.colUser);
+    return this.colUserParams;
+  }
 
   getColMembers(colUserParams: ColUserParams) {
     this.getCurrentColUserType();
+    var response = this.colMemberCache.get(
+      Object.values(colUserParams).join('-')
+    );
+    if (response) {
+      return of(response);
+    }
     let params = this.getPaginationHeaders(
       colUserParams.pageNumber,
       colUserParams.pageSize
@@ -53,14 +82,25 @@ export class ColMembersService {
     return this.getPaginatedResults<ColMember[]>(
       this.baseUrl + 'colUsers',
       params
+    ).pipe(
+      map((response) => {
+        this.colMemberCache.set(
+          Object.values(colUserParams).join('-'),
+          response
+        );
+        return response;
+      })
     );
   }
 
   getColMember(colUsername: string) {
-    const colMember = this.colMembers.find(
-      (x) => x.colUsername === colUsername
-    );
-    if (colMember !== undefined) return of(colMember);
+    const colMember = [...this.colMemberCache.values()]
+      .reduce((arr, elem) => arr.concat(elem.result), [])
+      .find((colMember: ColMember) => colMember.colUsername === colUsername);
+    if (colMember) {
+      return of(colMember);
+    }
+    console.log(colMember);
     return this.http.get<ColMember>(this.baseUrl + 'colUsers/' + colUsername);
   }
 

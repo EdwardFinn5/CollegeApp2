@@ -7,7 +7,7 @@ export class ColUserParams {
   collegeLocation = 'Des Moines, IA';
   collegeName: string;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 3;
   classYear = 'Junior';
   proposedMajor = 'Accounting';
 
