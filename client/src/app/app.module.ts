@@ -34,6 +34,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
 import { DateInputComponent } from './_forms/date-input/date-input.component';
+import { ColMemberMessagesComponent } from './colmembers/col-member-messages/col-member-messages.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { DateInputComponent } from './_forms/date-input/date-input.component';
     ListsComponent,
     TextInputComponent,
     DateInputComponent,
+    ColMemberMessagesComponent,
   ],
   imports: [
     BrowserModule,

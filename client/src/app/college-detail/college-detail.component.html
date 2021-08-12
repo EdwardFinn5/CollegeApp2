@@ -1,4 +1,4 @@
-<div class="row shadow" style="margin-left: 25px" *ngIf="colMember">
+<div class="row shadow" style="margin-left: 25px">
     <div class="col-4">
         
         <div class="card">
@@ -21,7 +21,7 @@
             <div class="card-footer">
                 <div class="btn-group d-flex">
                     <button class="btn btn-primary mr-2">Possible Fit</button>
-                    <button class="btn btn-success">Message</button>
+                    <button (click)="selectTab(3)"  class="btn btn-success">Message</button>
                 </div>
             </div>
         </div>
@@ -30,8 +30,8 @@
 
 <div class="col-8">
 
-    <tabset class="member-tabset">
-        <tab heading='About {{colMember.collegeNickname}}'>
+    <tabset class="member-tabset" #colMemberTabs>
+        <tab heading='About {{colMember.collegeNickname}}' (selectTab)="onTabActivated($event)" >
             <h4><strong>{{colMember.collegeName}}</strong></h4>
             
             <p>{{colMember.collegeDescription}}</p>
@@ -54,7 +54,7 @@
                 <strong>Virtual Tour of Campus:</strong> {{colMember.collegeVirtual}}
             </p>
         </tab>
-        <tab heading='Contact Information'>
+        <tab heading='Contact Information' (selectTab)="onTabActivated($event)">
             <br>
             <h4>Who to Contact in Admissions</h4>
             <br>
@@ -71,13 +71,14 @@
             <br>
             <strong>Or use the messaging service in the next panel.</strong>
         </tab>
-        <tab heading='Message {{colMember.adminContact}}'>
-            <h4>Messages</h4>
-        </tab>
 
-        <tab heading='Campus Photos'>
-             <ngx-gallery [options]= "galleryOptions" [images]="galleryImages" 
-                style="display: inline-block; margin-bottom: 20px;"></ngx-gallery> 
+        <tab heading='Campus Photos' (selectTab)="onTabActivated($event)">
+            <ngx-gallery [options]= "galleryOptions" [images]="galleryImages" 
+               style="display: inline-block; margin-bottom: 20px;"></ngx-gallery> 
+       </tab>
+
+        <tab heading='Messages' (selectTab)="onTabActivated($event)">
+            <app-col-member-messages [messages]="messages" [colUsername]="colMember.colUsername"></app-col-member-messages>
         </tab>
 
     </tabset>

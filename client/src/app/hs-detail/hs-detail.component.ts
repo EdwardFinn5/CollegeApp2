@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   NgxGalleryAnimation,
   NgxGalleryImage,
   NgxGalleryOptions,
 } from '@kolkov/ngx-gallery';
+import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { ColMember } from '../_models/colMember';
+import { Message } from '../_models/message';
 import { ColMembersService } from '../_services/col-members.service';
+import { MessageService } from '../_services/message.service';
 
 @Component({
   selector: 'app-hs-detail',
@@ -14,17 +17,27 @@ import { ColMembersService } from '../_services/col-members.service';
   styleUrls: ['./hs-detail.component.css'],
 })
 export class HsDetailComponent implements OnInit {
+  @ViewChild('colMemberTabs', { static: true }) colMemberTabs: TabsetComponent;
   colMember: ColMember;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  activeTab: TabDirective;
+  messages: Message[] = [];
 
   constructor(
     private colMemberService: ColMembersService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.loadColMember();
+    this.route.data.subscribe((data) => {
+      this.colMember = data.colMember;
+    });
+
+    this.route.queryParams.subscribe((params) => {
+      params.tab ? this.selectTab(params.tab) : this.selectTab(0);
+    });
 
     this.galleryOptions = [
       {
@@ -36,6 +49,7 @@ export class HsDetailComponent implements OnInit {
         preview: false,
       },
     ];
+    this.galleryImages = this.getHsImages();
   }
 
   getHsImages(): NgxGalleryImage[] {
@@ -50,13 +64,22 @@ export class HsDetailComponent implements OnInit {
     return hsStudentUrls;
   }
 
-  loadColMember() {
-    this.colMemberService
-      .getColMember(this.route.snapshot.paramMap.get('colusername'))
-      .subscribe((colMember) => {
-        this.colMember = colMember;
-        console.log(colMember.colUsername);
-        this.galleryImages = this.getHsImages();
+  loadMessages() {
+    this.messageService
+      .getMessageThread(this.colMember.colUsername)
+      .subscribe((messages) => {
+        this.messages = messages;
       });
+  }
+
+  selectTab(tabId: number) {
+    this.colMemberTabs.tabs[tabId].active = true;
+  }
+
+  onTabActivated(data: TabDirective) {
+    this.activeTab = data;
+    if (this.activeTab.heading === 'Messages' && this.messages.length === 0) {
+      this.loadMessages();
+    }
   }
 }

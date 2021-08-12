@@ -1,4 +1,4 @@
-<div class="row shadow" style="margin-left: 25px" *ngIf="colMember">
+<div class="row shadow" style="margin-left: 25px">
     <div class="col-4">  
 
         <div class="card">
@@ -23,7 +23,7 @@
             <div class="card-footer">
                 <div class="btn-group d-flex">
                     <button class="btn btn-primary mr-2">Possible Fit</button>
-                    <button class="btn btn-success">Message</button>
+                    <button (click)="selectTab(2)" class="btn btn-success">Message</button>
                 </div>
             </div>
             </div>
@@ -31,8 +31,8 @@
 
             <div class="col-8">
 
-                <tabset class="member-tabset">
-                    <tab heading='About {{colMember.firstName}}'>
+                <tabset class="member-tabset" #colMemberTabs>
+                    <tab heading='About {{colMember.firstName}}' (selectTab)="onTabActivated($event)" >
                         <h4>Academic Information</h4>
                         <p>GPA: {{colMember.gpa}}</p>
                         <p>Graduation Date: {{colMember.hsGradDate | date: "MM/dd/yyyy"}}</p>
@@ -43,15 +43,13 @@
                         <h4>Dream Job</h4>
                         <p>{{colMember.dreamJob}}</p>
                     </tab>
-                    <tab heading='Messages'>
-                        <h4>Messages</h4>
+                    <tab heading='Photos' (selectTab)="onTabActivated($event)">
+                        <ngx-gallery [options]= "galleryOptions" [images]="galleryImages" 
+                             style="display: inline-block; margin-bottom: 20px;"></ngx-gallery>
+                     </tab> 
+                    <tab heading='Messages' (selectTab)="onTabActivated($event)">
+                      <app-col-member-messages [messages]="messages" [colUsername]="colMember.colUsername"></app-col-member-messages> 
                     </tab>
-
-                    <tab heading='Photos'>
-                       <ngx-gallery [options]= "galleryOptions" [images]="galleryImages" 
-                            style="display: inline-block; margin-bottom: 20px;"></ngx-gallery>
-                    </tab> 
-
                 </tabset>
             </div>
 

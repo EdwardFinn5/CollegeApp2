@@ -56,6 +56,7 @@ namespace API.Entities
         public ICollection<FactFeature> FactFeatures { get; set; }
         public ICollection<ColUserLike> LikedByColUsers { get; set; }
         public ICollection<ColUserLike> LikedColUsers { get; set; }
-
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
     }
 }

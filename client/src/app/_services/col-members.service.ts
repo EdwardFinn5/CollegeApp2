@@ -8,6 +8,7 @@ import { ColUser } from '../_models/colUser';
 import { ColUserParams } from '../_models/colUserParams';
 import { PaginatedResult } from '../_models/pagination';
 import { ColAccountService } from './col-account.service';
+import { getPaginatedResults, getPaginationHeaders } from './pagniationHelper';
 
 @Injectable({
   providedIn: 'root',
@@ -53,7 +54,7 @@ export class ColMembersService {
     if (response) {
       return of(response);
     }
-    let params = this.getPaginationHeaders(
+    let params = getPaginationHeaders(
       colUserParams.pageNumber,
       colUserParams.pageSize
     );
@@ -79,9 +80,10 @@ export class ColMembersService {
       params = params.append('orderBy', colUserParams.orderBy);
     }
 
-    return this.getPaginatedResults<ColMember[]>(
+    return getPaginatedResults<ColMember[]>(
       this.baseUrl + 'colUsers',
-      params
+      params,
+      this.http
     ).pipe(
       map((response) => {
         this.colMemberCache.set(
@@ -98,9 +100,11 @@ export class ColMembersService {
       .reduce((arr, elem) => arr.concat(elem.result), [])
       .find((colMember: ColMember) => colMember.colUsername === colUsername);
     if (colMember) {
+      console.log(colMember.colUsername);
+      console.log('found it');
       return of(colMember);
     }
-    console.log(colMember);
+    console.log('can find');
     return this.http.get<ColMember>(this.baseUrl + 'colUsers/' + colUsername);
   }
 
@@ -131,11 +135,12 @@ export class ColMembersService {
   }
 
   getLikes(predicate: string, pageNumber, pageSize) {
-    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    let params = getPaginationHeaders(pageNumber, pageSize);
     params = params.append('predicate', predicate);
-    return this.getPaginatedResults<Partial<ColMember[]>>(
+    return getPaginatedResults<Partial<ColMember[]>>(
       this.baseUrl + 'likes',
-      params
+      params,
+      this.http
     );
   }
 
@@ -144,35 +149,6 @@ export class ColMembersService {
   //     this.baseUrl + 'likes?predicate=' + predicate
   //   );
   // }
-
-  private getPaginatedResults<T>(url, params) {
-    const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
-    return this.http
-      .get<T>(url, {
-        observe: 'response',
-        params,
-      })
-      .pipe(
-        map((response) => {
-          paginatedResult.result = response.body;
-          if (response.headers.get('Pagination') !== null) {
-            paginatedResult.pagination = JSON.parse(
-              response.headers.get('Pagination')
-            );
-          }
-          return paginatedResult;
-        })
-      );
-  }
-
-  private getPaginationHeaders(pageNumber: number, pageSize: number) {
-    let params = new HttpParams();
-
-    params = params.append('pageNumber', pageNumber.toString());
-    params = params.append('pageSize', pageSize.toString());
-
-    return params;
-  }
 
   getCurrentColUserType() {
     const colUser: ColUser = JSON.parse(localStorage.getItem('colUser'));

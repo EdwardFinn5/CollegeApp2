@@ -20,6 +20,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ListsComponent } from './lists/lists.component';
 import { PreventUnsavedHsChangesGuard } from './_guards/prevent-unsaved-hs-changes.guard';
 import { PreventUnsavedCollegeChangesGuard } from './_guards/prevent-unsaved-college-changes.guard';
+import { ColMemberDetailedResolver } from './_resolvers/colMember-detailed.resolver';
+
 // import { PreventUnsavedHsChangesGuard } from './_guards/prevent-unsaved-hs-changes.guard';
 // import { PreventUnsavedCollegeChangesGuard } from './_guards/prevent-unsaved-college-changes.guard';
 
@@ -36,7 +38,11 @@ const routes: Routes = [
         component: HsEditComponent,
         canDeactivate: [PreventUnsavedHsChangesGuard],
       },
-      { path: 'hsdetail/:colusername', component: HsDetailComponent },
+      {
+        path: 'hsdetail/:colusername',
+        component: HsDetailComponent,
+        resolve: { colMember: ColMemberDetailedResolver },
+      },
       { path: 'hsdetail/:id', component: HsDetailComponent },
       { path: 'hsedit', component: HsEditComponent },
       {
@@ -44,7 +50,11 @@ const routes: Routes = [
         component: CollegeEditComponent,
         canDeactivate: [PreventUnsavedCollegeChangesGuard],
       },
-      { path: 'collegedetail/:colusername', component: CollegeDetailComponent },
+      {
+        path: 'collegedetail/:colusername',
+        component: CollegeDetailComponent,
+        resolve: { colMember: ColMemberDetailedResolver },
+      },
       { path: 'collegedetail/:id', component: CollegeDetailComponent },
       { path: 'messages', component: MessagesComponent },
       { path: 'lists', component: ListsComponent },

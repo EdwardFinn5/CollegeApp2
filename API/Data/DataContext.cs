@@ -15,7 +15,7 @@ namespace API.Data
         public DbSet<ColPhoto> ColPhotos { get; set; }
         public DbSet<FactFeature> FactFeatures { get; set; }
         public DbSet<ColUserLike> Likes { get; set; }
-        // public DbSet<Message> Messages { get; set; }
+        public DbSet<Message> Messages { get; set; }
         // public DbSet<Group> Groups { get; set; }
         // public DbSet<Connection> Connections { get; set; }
 
@@ -77,15 +77,15 @@ namespace API.Data
                 .HasForeignKey(s => s.LikedColUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            // modelBuilder.Entity<Message>()
-            //     .HasOne(u => u.Recipient)
-            //     .WithMany(m => m.MessagesReceived)
-            //     .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Message>()
+                .HasOne(u => u.Recipient)
+                .WithMany(m => m.MessagesReceived)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            // modelBuilder.Entity<Message>()
-            //     .HasOne(u => u.Sender)
-            //     .WithMany(m => m.MessagesSent)
-            //     .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Message>()
+                .HasOne(u => u.Sender)
+                .WithMany(m => m.MessagesSent)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // modelBuilder.ApplyUtcDateTimeConverter();
         }
